@@ -1,0 +1,627 @@
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #F3E6D0;
+    color: #2B1717;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    min-height: 78px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 7%;
+
+    background: #FFF9F0;
+
+    border-bottom: 1px solid #E3D1B7;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 100;
+}
+
+
+/* LOGO */
+
+.logo {
+    font-size: 25px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    color: #2B1717;
+}
+
+.logo span {
+    color: #8B1E1E;
+}
+
+
+/* NAVIGATION */
+
+.nav-links {
+    display: flex;
+
+    align-items: center;
+
+    gap: 28px;
+}
+
+.nav-links a {
+    font-size: 14px;
+
+    color: #5F4949;
+
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #8B1E1E;
+}
+
+
+/* CURRENT PAGE */
+
+.nav-links .current {
+    color: #8B1E1E;
+}
+
+
+/* LOGOUT */
+
+.logout-button {
+    padding: 9px 18px;
+
+    border: 1px solid #8B1E1E;
+
+    border-radius: 4px;
+
+    color: #8B1E1E !important;
+
+    transition: 0.3s;
+}
+
+.logout-button:hover {
+    background: #8B1E1E;
+
+    color: #FFFFFF !important;
+}
+
+
+/* =========================
+   PAGE HEADER
+========================= */
+
+.orders-header {
+    padding: 90px 7% 80px;
+
+    background: #F3E6D0;
+
+    border-bottom: 1px solid #E1CFB5;
+}
+
+.orders-header-content {
+    max-width: 750px;
+}
+
+
+/* EYEBROW */
+
+.eyebrow {
+    display: block;
+
+    color: #8B1E1E;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 15px;
+}
+
+
+/* PAGE TITLE */
+
+.orders-header h1 {
+    font-size: clamp(42px, 6vw, 68px);
+
+    line-height: 1.05;
+
+    color: #2B1717;
+
+    margin-bottom: 20px;
+}
+
+.orders-header h1 span {
+    color: #8B1E1E;
+}
+
+
+/* PAGE TEXT */
+
+.orders-header p {
+    max-width: 600px;
+
+    color: #705C5C;
+
+    font-size: 18px;
+}
+
+
+/* =========================
+   ORDERS SECTION
+========================= */
+
+.orders-section {
+    padding: 80px 7% 90px;
+
+    background: #FFF9F0;
+}
+
+
+/* SECTION TITLE */
+
+.section-heading {
+    margin-bottom: 40px;
+}
+
+.section-heading span {
+    color: #8B1E1E;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+}
+
+.section-heading h2 {
+    margin-top: 8px;
+
+    color: #2B1717;
+
+    font-size: 36px;
+}
+
+
+/* =========================
+   ORDER LIST
+========================= */
+
+.orders-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 25px;
+
+    max-width: 1000px;
+}
+
+
+/* =========================
+   ORDER CARD
+========================= */
+
+.order-card {
+    position: relative;
+
+    background: #FFF9F0;
+
+    border: 1px solid #DDC9AC;
+
+    border-radius: 8px;
+
+    padding: 30px;
+
+    transition: 0.3s;
+}
+
+.order-card:hover {
+    transform: translateY(-4px);
+
+    border-color: #8B1E1E;
+
+    box-shadow:
+        0 12px 30px rgba(80, 40, 30, 0.10);
+}
+
+
+/* =========================
+   ORDER TOP
+========================= */
+
+.order-top {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    padding-bottom: 25px;
+
+    border-bottom: 1px solid #E3D1B7;
+}
+
+.order-top h3 {
+    color: #2B1717;
+
+    font-size: 23px;
+
+    margin-bottom: 4px;
+}
+
+.order-top p {
+    color: #705C5C;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   ORDER STATUS
+========================= */
+
+.order-status {
+    color: #8B1E1E;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+
+/* =========================
+   ORDER CONTENT
+========================= */
+
+.order-content {
+    padding: 25px 0;
+}
+
+.order-content h4,
+.booking-info h4 {
+    color: #8B1E1E;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================
+   ITEMS
+========================= */
+
+.item-row {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 8px 0;
+
+    color: #5F4949;
+
+    font-size: 14px;
+}
+
+.quantity {
+    color: #8B1E1E;
+
+    font-weight: bold;
+}
+
+.price {
+    color: #2B1717;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+
+/* =========================
+   BOOKING INFORMATION
+========================= */
+
+.booking-info {
+    padding: 20px 0;
+
+    border-top: 1px solid #E3D1B7;
+}
+
+.booking-info p {
+    color: #705C5C;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   ORDER FOOTER
+========================= */
+
+.order-footer {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #E3D1B7;
+}
+
+.order-footer span {
+    color: #705C5C;
+
+    font-size: 14px;
+}
+
+.order-footer strong {
+    color: #8B1E1E;
+
+    font-size: 22px;
+}
+
+
+/* =========================
+   EMPTY ORDERS
+========================= */
+
+.empty-orders {
+    max-width: 700px;
+
+    padding: 55px 35px;
+
+    background: #F3E6D0;
+
+    border: 1px solid #DDC9AC;
+
+    border-radius: 8px;
+}
+
+.empty-orders h3 {
+    color: #2B1717;
+
+    font-size: 32px;
+
+    margin-bottom: 10px;
+}
+
+.empty-orders p {
+    color: #705C5C;
+
+    font-size: 16px;
+
+    max-width: 550px;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   MENU BUTTON
+========================= */
+
+.menu-button {
+    display: inline-block;
+
+    padding: 13px 25px;
+
+    background: #8B1E1E;
+
+    color: #FFFFFF;
+
+    border-radius: 4px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.menu-button:hover {
+    background: #B52B2B;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    padding: 45px 7%;
+
+    background: #2B1717;
+
+    text-align: center;
+}
+
+.footer-logo {
+    color: #FFFFFF;
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 8px;
+}
+
+.footer-logo span {
+    color: #E7B98A;
+}
+
+.footer p {
+    color: #CBBABA;
+
+    font-size: 14px;
+}
+
+.footer .copyright {
+    margin-top: 10px;
+
+    color: #8F7D7D;
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 800px) {
+
+    .navbar {
+        min-height: 70px;
+
+        padding: 0 5%;
+    }
+
+    .nav-links {
+        gap: 12px;
+    }
+
+    .nav-links a:not(.logout-button) {
+        display: none;
+    }
+
+
+    /* HEADER */
+
+    .orders-header {
+        padding: 65px 5%;
+    }
+
+    .orders-header h1 {
+        font-size: 45px;
+    }
+
+    .orders-header p {
+        font-size: 16px;
+    }
+
+
+    /* ORDERS */
+
+    .orders-section {
+        padding: 65px 5%;
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 500px) {
+
+    .logo {
+        font-size: 21px;
+    }
+
+    .logout-button {
+        padding: 8px 14px;
+    }
+
+
+    /* HEADER */
+
+    .orders-header h1 {
+        font-size: 38px;
+    }
+
+
+    /* SECTION */
+
+    .section-heading h2 {
+        font-size: 30px;
+    }
+
+
+    /* CARD */
+
+    .order-card {
+        padding: 22px;
+    }
+
+
+    /* ORDER TOP */
+
+    .order-top {
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+
+    /* ITEMS */
+
+    .item-row {
+        align-items: flex-start;
+    }
+
+
+    /* TOTAL */
+
+    .order-footer strong {
+        font-size: 20px;
+    }
+
+
+    /* EMPTY */
+
+    .empty-orders {
+        padding: 45px 25px;
+    }
+
+}

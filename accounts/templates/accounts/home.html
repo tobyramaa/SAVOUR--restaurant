@@ -1,0 +1,280 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Savouré | Restaurant</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+
+</head>
+
+
+<body>
+
+
+
+<nav class="navbar">
+
+    <a href="{% url 'home' %}" class="logo">
+        SAVOUR<span>É</span>
+    </a>
+
+
+    <div class="nav-links">
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+        {% if user.is_authenticated %}
+
+            <a href="{% url 'menu' %}">
+                Menu
+            </a>
+
+            <a href="{% url 'dashboard' %}">
+                Dashboard
+            </a>
+
+            <a href="{% url 'logout' %}"
+               class="nav-button">
+                Logout
+            </a>
+
+        {% else %}
+
+            <a href="{% url 'login' %}">
+                Login
+            </a>
+
+            <a href="{% url 'register' %}"
+               class="nav-button">
+                Register
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</nav>
+
+
+
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-small">
+            Welcome to Savouré
+        </div>
+
+
+        <h1>
+            Taste the
+            <span>extraordinary.</span>
+        </h1>
+
+
+        <p>
+            Discover carefully prepared meals, elegant dining
+            and unforgettable moments all in one place.
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a href="{% url 'menu' %}"
+               class="btn btn-primary">
+
+                Explore Menu
+
+            </a>
+
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'my-bookings' %}"
+                   class="btn btn-outline">
+
+                    Book a Table
+
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'login' %}"
+                   class="btn btn-outline">
+
+                    Book a Table
+
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     FEATURES
+========================= -->
+
+<section class="features">
+
+    <div class="section-title">
+
+        <small>
+            Why choose us
+        </small>
+
+        <h2>
+            More than just a meal
+        </h2>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🍽️
+            </div>
+
+            <h3>
+                Delicious Food
+            </h3>
+
+            <p>
+                Enjoy carefully prepared meals made
+                with quality ingredients and attention
+                to detail.
+            </p>
+
+        </div>
+
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🪑
+            </div>
+
+            <h3>
+                Easy Reservations
+            </h3>
+
+            <p>
+                Reserve your preferred table before
+                arriving and enjoy a smooth dining
+                experience.
+            </p>
+
+        </div>
+
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🚴
+            </div>
+
+            <h3>
+                Fast Service
+            </h3>
+
+            <p>
+                From kitchen preparation to order
+                collection, we keep everything
+                organized and efficient.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     CALL TO ACTION
+========================= -->
+
+<section class="cta">
+
+    <h2>
+        Your table is waiting.
+    </h2>
+
+    <p>
+        Whether you're dining in or taking your
+        favourite meal with you, your next great
+        experience starts here.
+    </p>
+
+
+    {% if user.is_authenticated %}
+
+        <a href="{% url 'menu' %}"
+           class="btn btn-primary">
+
+            Start Your Order
+
+        </a>
+
+    {% else %}
+
+        <a href="{% url 'register' %}"
+           class="btn btn-primary">
+
+            Get Started
+
+        </a>
+
+    {% endif %}
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="footer">
+
+    <div class="footer-logo">
+        SAVOUR<span>É</span>
+    </div>
+
+    <p>
+        © 2026 Savouré Restaurant Management System.
+        All rights reserved.
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

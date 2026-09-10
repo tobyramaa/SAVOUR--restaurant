@@ -1,0 +1,433 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Create Staff | Savouré</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/staff_create.css' %}">
+
+</head>
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a href="{% url 'manager-dashboard' %}"
+           class="logo">
+            SAVOUR<span>É</span>
+        </a>
+
+        <div class="nav-links">
+
+            <a href="{% url 'manager-dashboard' %}">
+                Dashboard
+            </a>
+
+            <a href="{% url 'staff-create' %}"
+               class="active">
+                Staff
+            </a>
+
+            <a href="{% url 'logout' %}"
+               class="logout-button">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="page-container">
+
+
+        <!-- PAGE INTRO -->
+
+        <section class="page-intro">
+
+            <p class="small-heading">
+                STAFF MANAGEMENT
+            </p>
+
+            <h1>
+                Create Staff Account
+            </h1>
+
+            <p>
+                Create an account for a new member of your
+                restaurant team. They will receive an activation
+                link to create their password.
+            </p>
+
+        </section>
+
+
+        <!-- FORM CARD -->
+
+        <section class="form-card">
+
+
+            <div class="form-heading">
+
+                <h2>
+                    Staff Information
+                </h2>
+
+                <p>
+                    Enter the staff member's details below.
+                </p>
+
+            </div>
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                {% if form.non_field_errors %}
+
+                    <div class="form-errors">
+
+                        {% for error in form.non_field_errors %}
+
+                            <p>{{ error }}</p>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- USERNAME -->
+
+                <div class="form-group">
+
+                    <label for="{{ form.username.id_for_label }}">
+                        Username
+                    </label>
+
+                    {{ form.username }}
+
+                    {% for error in form.username.errors %}
+
+                        <small class="error">
+                            {{ error }}
+                        </small>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- FIRST NAME + LAST NAME -->
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label for="{{ form.first_name.id_for_label }}">
+                            First Name
+                        </label>
+
+                        {{ form.first_name }}
+
+                        {% for error in form.first_name.errors %}
+
+                            <small class="error">
+                                {{ error }}
+                            </small>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="{{ form.last_name.id_for_label }}">
+                            Last Name
+                        </label>
+
+                        {{ form.last_name }}
+
+                        {% for error in form.last_name.errors %}
+
+                            <small class="error">
+                                {{ error }}
+                            </small>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="{{ form.email.id_for_label }}">
+                        Email Address
+                    </label>
+
+                    {{ form.email }}
+
+                    {% for error in form.email.errors %}
+
+                        <small class="error">
+                            {{ error }}
+                        </small>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- PHONE + ADDRESS -->
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label for="{{ form.phone_number.id_for_label }}">
+                            Phone Number
+                        </label>
+
+                        {{ form.phone_number }}
+
+                        {% for error in form.phone_number.errors %}
+
+                            <small class="error">
+                                {{ error }}
+                            </small>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="{{ form.address.id_for_label }}">
+                            Address
+                        </label>
+
+                        {{ form.address }}
+
+                        {% for error in form.address.errors %}
+
+                            <small class="error">
+                                {{ error }}
+                            </small>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- ROLE + POSITION -->
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label for="{{ form.role.id_for_label }}">
+                            Staff Role
+                        </label>
+
+                        {{ form.role }}
+
+                        {% for error in form.role.errors %}
+
+                            <small class="error">
+                                {{ error }}
+                            </small>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="{{ form.position.id_for_label }}">
+                            Position
+                        </label>
+
+                        {{ form.position }}
+
+                        {% for error in form.position.errors %}
+
+                            <small class="error">
+                                {{ error }}
+                            </small>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- RIDER INFORMATION -->
+
+                {% if form.vehicle_type %}
+
+                    <div class="rider-section">
+
+                        <div class="rider-heading">
+
+                            <p class="small-heading">
+                                RIDER INFORMATION
+                            </p>
+
+                            <h3>
+                                Vehicle Details
+                            </h3>
+
+                            <p>
+                                Complete these fields when the
+                                staff member is a Rider.
+                            </p>
+
+                        </div>
+
+
+                        <div class="form-row">
+
+
+                            <div class="form-group">
+
+                                <label for="{{ form.vehicle_type.id_for_label }}">
+                                    Vehicle Type
+                                </label>
+
+                                {{ form.vehicle_type }}
+
+                                {% for error in form.vehicle_type.errors %}
+
+                                    <small class="error">
+                                        {{ error }}
+                                    </small>
+
+                                {% endfor %}
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="{{ form.vehicle_number.id_for_label }}">
+                                    Vehicle Number
+                                </label>
+
+                                {{ form.vehicle_number }}
+
+                                {% for error in form.vehicle_number.errors %}
+
+                                    <small class="error">
+                                        {{ error }}
+                                    </small>
+
+                                {% endfor %}
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- BUTTONS -->
+
+                <div class="form-actions">
+
+                    <a href="{% url 'manager-dashboard' %}"
+                       class="cancel-button">
+                        Cancel
+                    </a>
+
+                    <button type="submit"
+                            class="submit-button">
+                        Create Staff Account
+                    </button>
+
+                </div>
+
+
+            </form>
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <div>
+
+                <div class="footer-logo">
+                    SAVOUR<span>É</span>
+                </div>
+
+                <p>
+                    Restaurant management made simple.
+                </p>
+
+            </div>
+
+
+            <div class="footer-right">
+
+                <p>
+                    Manager Portal
+                </p>
+
+                <p>
+                    © 2026 Savouré
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+</body>
+
+</html>

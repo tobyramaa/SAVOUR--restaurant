@@ -1,0 +1,407 @@
+/* ========================================
+   GLOBAL
+======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #F3E6D0;
+    color: #2B1717;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+}
+
+
+/* ========================================
+   NAVBAR
+======================================== */
+
+.navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 25px 7%;
+
+    background: rgba(255, 248, 231, 0.94);
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #2B1717;
+}
+
+.logo span {
+    color: #8B1E1E;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: #2B1717;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #8B1E1E;
+}
+
+.nav-button {
+    padding: 10px 20px;
+
+    border: 1px solid #8B1E1E;
+    border-radius: 4px;
+
+    color: #8B1E1E !important;
+}
+
+.nav-button:hover {
+    background: #8B1E1E;
+    color: #FFFFFF !important;
+}
+
+
+/* ========================================
+   HERO
+======================================== */
+
+.hero {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+
+    padding: 120px 7%;
+
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.62),
+            rgba(0, 0, 0, 0.78)
+        ),
+        url("../images/hero.jpg");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.hero-small {
+    color: #FFD6A5;
+
+    font-size: 15px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    color: #FFFFFF;
+
+    font-size: clamp(50px, 7vw, 90px);
+    line-height: 1.05;
+
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    color: #FFCF9D;
+}
+
+.hero p {
+    max-width: 550px;
+
+    color: #EEEEEE;
+
+    font-size: 18px;
+
+    margin-bottom: 35px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+
+/* ========================================
+   BUTTONS
+======================================== */
+
+.btn {
+    display: inline-block;
+
+    padding: 14px 28px;
+
+    border-radius: 4px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background: #8B1E1E;
+    color: #FFFFFF;
+}
+
+.btn-primary:hover {
+    background: #B52B2B;
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+}
+
+.btn-outline:hover {
+    border-color: #FFCF9D;
+    color: #FFCF9D;
+}
+
+
+/* ========================================
+   WHY CHOOSE US
+======================================== */
+
+.features {
+    padding: 100px 7%;
+
+    background: #F3E6D0;
+}
+
+.section-title {
+    text-align: center;
+
+    margin-bottom: 60px;
+}
+
+.section-title small {
+    color: #8B1E1E;
+
+    letter-spacing: 3px;
+    text-transform: uppercase;
+
+    font-weight: bold;
+}
+
+.section-title h2 {
+    color: #2B1717;
+
+    font-size: 42px;
+
+    margin-top: 10px;
+}
+
+.feature-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.feature-card {
+    padding: 40px 30px;
+
+    background: #FFFFFF;
+
+    border: 1px solid #E8D8C0;
+
+    border-radius: 8px;
+
+    text-align: center;
+
+    transition: 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+
+    border-color: #8B1E1E;
+
+    box-shadow: 0 10px 30px rgba(139, 30, 30, 0.10);
+}
+
+.feature-icon {
+    font-size: 40px;
+
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    color: #8B1E1E;
+
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    color: #6F5B5B;
+}
+
+
+/* ========================================
+   CALL TO ACTION
+======================================== */
+
+.cta {
+    padding: 110px 7%;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.62),
+            rgba(0, 0, 0, 0.78)
+        ),
+        url("../images/restaurant.jpeg");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.cta h2 {
+    color: #FFFFFF;
+
+    font-size: 48px;
+
+    margin-bottom: 20px;
+}
+
+.cta p {
+    color: #EEEEEE;
+
+    max-width: 600px;
+
+    margin: 0 auto 30px;
+}
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.footer {
+    padding: 50px 7%;
+
+    background: #2B1717;
+
+    text-align: center;
+}
+
+.footer-logo {
+    color: #FFFFFF;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    margin-bottom: 15px;
+}
+
+.footer-logo span {
+    color: #FFCF9D;
+}
+
+.footer p {
+    color: #D6C4C4;
+
+    font-size: 14px;
+}
+
+
+/* ========================================
+   RESPONSIVE DESIGN
+======================================== */
+
+@media (max-width: 800px) {
+
+    .navbar {
+        padding: 20px 5%;
+    }
+
+    .nav-links {
+        gap: 12px;
+    }
+
+    .nav-links a:not(.nav-button) {
+        display: none;
+    }
+
+    .hero {
+        padding: 120px 5% 80px;
+    }
+
+    .hero h1 {
+        font-size: 52px;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cta h2 {
+        font-size: 36px;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .hero h1 {
+        font-size: 44px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .btn {
+        padding: 12px 22px;
+    }
+
+    .section-title h2 {
+        font-size: 34px;
+    }
+}

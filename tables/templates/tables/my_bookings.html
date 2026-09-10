@@ -1,0 +1,280 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Bookings | Savouré</title>
+
+    <link rel="stylesheet" href="{% static 'css/my_bookings.css' %}">
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav class="navbar">
+
+        <a href="{% url 'home' %}" class="logo">
+            SAVOUR<span>É</span>
+        </a>
+
+        <div class="nav-links">
+
+            <a href="{% url 'menu' %}">
+                Menu
+            </a>
+
+            <a href="{% url 'my-orders' %}">
+                My Orders
+            </a>
+
+            <a href="{% url 'my-bookings' %}" class="current">
+                My Bookings
+            </a>
+
+            <a href="{% url 'dashboard' %}">
+                Dashboard
+            </a>
+
+            <a href="{% url 'logout' %}" class="logout-button">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         PAGE HEADER
+    ========================== -->
+
+    <section class="bookings-header">
+
+        <div class="bookings-header-content">
+
+            <span class="eyebrow">
+                TABLE RESERVATIONS
+            </span>
+
+            <h1>
+                My <span>Bookings</span>
+            </h1>
+
+            <p>
+                View your table reservations and keep track
+                of your upcoming dining experiences.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         BOOKINGS SECTION
+    ========================== -->
+
+    <section class="bookings-section">
+
+        <div class="section-heading">
+
+            <span>
+                YOUR RESERVATIONS
+            </span>
+
+            <h2>
+                Recent bookings
+            </h2>
+
+        </div>
+
+
+        {% if bookings %}
+
+            <div class="bookings-list">
+
+                {% for booking in bookings %}
+
+                    <!-- =========================
+                         BOOKING CARD
+                    ========================== -->
+
+                    <div class="booking-card">
+
+                        <div class="booking-top">
+
+                            <div>
+
+                                <h3>
+                                    Table
+                                    {{ booking.table.table_number }}
+                                </h3>
+
+                                <p>
+                                    {{ booking.booking_date }}
+                                    ·
+                                    {{ booking.booking_time }}
+                                </p>
+
+                            </div>
+
+
+                            <div class="booking-status">
+                                {{ booking.get_status_display }}
+                            </div>
+
+                        </div>
+
+
+                        <!-- BOOKING DETAILS -->
+
+                        <div class="booking-details">
+
+                            <div class="detail">
+
+                                <span>
+                                    DATE
+                                </span>
+
+                                <p>
+                                    {{ booking.booking_date }}
+                                </p>
+
+                            </div>
+
+
+                            <div class="detail">
+
+                                <span>
+                                    TIME
+                                </span>
+
+                                <p>
+                                    {{ booking.booking_time }}
+                                </p>
+
+                            </div>
+
+
+                            <div class="detail">
+
+                                <span>
+                                    GUESTS
+                                </span>
+
+                                <p>
+                                    {{ booking.number_of_people }}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ORDER INFORMATION -->
+
+                        {% if booking.order %}
+
+                            <div class="order-info">
+
+                                <span>
+                                    ORDER
+                                </span>
+
+                                <p>
+                                    Order #{{ booking.order.id }}
+                                    ·
+                                    {{ booking.order.get_status_display }}
+                                </p>
+
+                            </div>
+
+                        {% else %}
+
+                            <div class="order-info">
+
+                                <span>
+                                    ORDER
+                                </span>
+
+                                <p>
+                                    No order attached yet.
+                                </p>
+
+                            </div>
+
+                        {% endif %}
+
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+        {% else %}
+
+            <!-- =========================
+                 NO BOOKINGS
+            ========================== -->
+
+            <div class="empty-bookings">
+
+                <span class="eyebrow">
+                    TABLE RESERVATIONS
+                </span>
+
+                <h3>
+                    No bookings yet.
+                </h3>
+
+                <p>
+                    You don't have any table reservations yet.
+                    Reserve a table for your next dining experience.
+                </p>
+
+                <a
+                    href="{% url 'book-table' %}"
+                    class="booking-button"
+                >
+                    Book a Table
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="footer">
+
+        <div class="footer-logo">
+            SAVOUR<span>É</span>
+        </div>
+
+        <p>
+            Good food. Great moments.
+        </p>
+
+        <p class="copyright">
+            © 2026 Savouré. All rights reserved.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

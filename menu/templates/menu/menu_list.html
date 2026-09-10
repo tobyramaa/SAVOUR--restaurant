@@ -1,0 +1,203 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Our Menu | Savouré</title>
+
+<link rel="stylesheet" href="{% static 'css/menu.css' %}">
+
+
+</head>
+
+<body>
+
+
+<nav class="navbar">
+
+    <a href="{% url 'home' %}" class="logo">
+        SAVOUR<span>É</span>
+    </a>
+
+    <div class="nav-links">
+        <a href="{% url 'menu' %}" class="current">Menu</a>
+        <a href="{% url 'my-orders' %}">My Orders</a>
+        <a href="{% url 'my-bookings' %}">My Bookings</a>
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+
+        <a href="{% url 'cart' %}" class="order-button">
+            View Order
+        </a>
+
+        <a href="{% url 'logout' %}" class="logout-button">
+            Logout
+        </a>
+    </div>
+
+</nav>
+
+
+<section class="menu-header">
+
+    <div class="menu-header-content">
+
+        <span class="eyebrow">OUR MENU</span>
+
+        <h1>
+            Good food, <span>great choices.</span>
+        </h1>
+
+        <p>
+            Explore our selection of carefully prepared dishes
+            and add your favourites to your order.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="menu-section">
+
+    {% for category in categories %}
+
+        <div class="category-section">
+
+            <div class="section-heading">
+
+                <span>MENU CATEGORY</span>
+
+                <h2>
+                    {{ category.name }}
+                </h2>
+
+                {% if category.description %}
+                    <p class="category-description">
+                        {{ category.description }}
+                    </p>
+                {% endif %}
+
+            </div>
+
+
+            <div class="menu-grid">
+
+                {% for item in category.menu_items.all %}
+
+                    {% if item.is_available %}
+
+                        <div class="menu-card">
+
+                            <div class="menu-image">
+
+                                {% if item.image %}
+
+                                    <img
+                                        src="{{ item.image.url }}"
+                                        alt="{{ item.name }}"
+                                    >
+
+                                {% else %}
+
+                                    <div class="no-image">
+                                        SAVOURÉ
+                                    </div>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="menu-content">
+
+                                <h3>
+                                    {{ item.name }}
+                                </h3>
+
+                                {% if item.description %}
+
+                                    <p>
+                                        {{ item.description }}
+                                    </p>
+
+                                {% endif %}
+
+
+                                <div class="menu-bottom">
+
+                                    <strong>
+                                        ₦{{ item.price }}
+                                    </strong>
+
+                                    <a
+                                        href="{% url 'add-to-cart' item.id %}"
+                                        class="add-button"
+                                    >
+                                        Add to Order
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    {% endif %}
+
+                {% empty %}
+
+                    <p class="empty-category">
+                        No items available in this category.
+                    </p>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    {% empty %}
+
+        <div class="empty-menu">
+
+            <span class="eyebrow">OUR MENU</span>
+
+            <h3>
+                No menu categories available.
+            </h3>
+
+            <p>
+                Please check back later for our available dishes.
+            </p>
+
+        </div>
+
+    {% endfor %}
+
+</section>
+
+
+<footer class="footer">
+
+    <div class="footer-logo">
+        SAVOUR<span>É</span>
+    </div>
+
+    <p>
+        Good food. Great moments.
+    </p>
+
+    <p class="copyright">
+        © 2026 Savouré. All rights reserved.
+    </p>
+
+</footer>
+
+
+</body>
+</html>

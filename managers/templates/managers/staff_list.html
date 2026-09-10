@@ -1,0 +1,271 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Staff Management | Savouré</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/staff_list.css' %}">
+
+</head>
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a href="{% url 'manager-dashboard' %}"
+           class="logo">
+            SAVOUR<span>É</span>
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="{% url 'manager-dashboard' %}">
+                Dashboard
+            </a>
+
+            <a href="{% url 'manager-staff-list' %}"
+               class="active">
+                Staff
+            </a>
+
+            <a href="{% url 'staff-create' %}">
+                Create Staff
+            </a>
+
+            <a href="{% url 'logout' %}"
+               class="logout-button">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <main class="page-container">
+
+
+        <section class="page-header">
+
+            <div>
+
+                <p class="small-heading">
+                    STAFF MANAGEMENT
+                </p>
+
+                <h1>
+                    Restaurant Staff
+                </h1>
+
+                <p>
+                    View and manage the members of your
+                    restaurant team.
+                </p>
+
+            </div>
+
+
+            <a href="{% url 'staff-create' %}"
+               class="create-button">
+                + Create Staff
+            </a>
+
+        </section>
+
+
+        <!-- STAFF TABLE -->
+
+        <section class="staff-card">
+
+
+            {% if staff_members %}
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Staff
+                                </th>
+
+                                <th>
+                                    Username
+                                </th>
+
+                                <th>
+                                    Role
+                                </th>
+
+                                <th>
+                                    Email
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for staff in staff_members %}
+
+                                <tr>
+
+                                    <td>
+
+                                        <strong>
+                                            {{ staff.user.get_full_name|default:staff.user.username }}
+                                        </strong>
+
+                                    </td>
+
+
+                                    <td>
+                                        {{ staff.user.username }}
+                                    </td>
+
+
+                                    <td>
+                                        {{ staff.position|default:"Staff" }}
+                                    </td>
+
+
+                                    <td>
+                                        {{ staff.user.email }}
+                                    </td>
+
+
+                                    <td>
+
+                                        {% if staff.user.is_active %}
+
+                                            <span class="status active">
+                                                Active
+                                            </span>
+
+                                        {% else %}
+
+                                            <span class="status inactive">
+                                                Inactive
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <a href="{% url 'manager-staff-detail' staff.id %}"
+                                           class="view-button">
+                                            View
+                                        </a>
+
+                                    </td>
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            {% else %}
+
+                <div class="empty-state">
+
+                    <h2>
+                        No Staff Yet
+                    </h2>
+
+                    <p>
+                        Create your first staff account to
+                        get started.
+                    </p>
+
+                    <a href="{% url 'staff-create' %}"
+                       class="create-button">
+                        Create Staff
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <div>
+
+                <div class="footer-logo">
+                    SAVOUR<span>É</span>
+                </div>
+
+                <p>
+                    Restaurant management made simple.
+                </p>
+
+            </div>
+
+
+            <div class="footer-right">
+
+                <p>
+                    Manager Portal
+                </p>
+
+                <p>
+                    © 2026 Savouré
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+</body>
+
+</html>
+

@@ -1,0 +1,667 @@
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #F3E6D0;
+    color: #2B1717;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    min-height: 78px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 7%;
+
+    background: #FFF9F0;
+
+    border-bottom: 1px solid #E3D1B7;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 100;
+}
+
+
+/* LOGO */
+
+.logo {
+    font-size: 25px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    color: #2B1717;
+}
+
+.logo span {
+    color: #8B1E1E;
+}
+
+
+/* NAVIGATION */
+
+.nav-links {
+    display: flex;
+
+    align-items: center;
+
+    gap: 28px;
+}
+
+.nav-links a {
+    font-size: 14px;
+
+    color: #5F4949;
+
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #8B1E1E;
+}
+
+
+/* LOGOUT */
+
+.logout-button {
+    padding: 9px 18px;
+
+    border: 1px solid #8B1E1E;
+
+    border-radius: 4px;
+
+    color: #8B1E1E !important;
+
+    transition: 0.3s;
+}
+
+.logout-button:hover {
+    background: #8B1E1E;
+
+    color: #FFFFFF !important;
+}
+
+
+/* =========================
+   WELCOME SECTION
+========================= */
+
+.welcome-section {
+    padding: 90px 7% 80px;
+
+    background: #F3E6D0;
+
+    border-bottom: 1px solid #E1CFB5;
+}
+
+.welcome-content {
+    max-width: 750px;
+}
+
+
+/* SMALL HEADING */
+
+.eyebrow {
+    display: block;
+
+    color: #8B1E1E;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 15px;
+}
+
+
+/* WELCOME TITLE */
+
+.welcome-content h1 {
+    font-size: clamp(42px, 6vw, 68px);
+
+    line-height: 1.05;
+
+    color: #2B1717;
+
+    margin-bottom: 20px;
+}
+
+.welcome-content h1 span {
+    color: #8B1E1E;
+}
+
+
+/* WELCOME TEXT */
+
+.welcome-content p {
+    max-width: 600px;
+
+    color: #705C5C;
+
+    font-size: 18px;
+}
+
+
+/* =========================
+   QUICK ACTION SECTION
+========================= */
+
+.dashboard-section {
+    padding: 80px 7% 90px;
+
+    background: #FFF9F0;
+}
+
+
+/* SECTION TITLE */
+
+.section-heading {
+    margin-bottom: 40px;
+}
+
+.section-heading span {
+    color: #8B1E1E;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+}
+
+.section-heading h2 {
+    margin-top: 8px;
+
+    color: #2B1717;
+
+    font-size: 36px;
+}
+
+
+/* =========================
+   ACTION GRID
+========================= */
+
+.action-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 25px;
+
+    max-width: 1100px;
+}
+
+
+/* =========================
+   ACTION CARD
+========================= */
+
+.action-card {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background: #FFF9F0;
+
+    border: 1px solid #DDC9AC;
+
+    border-radius: 8px;
+
+    transition: 0.3s;
+}
+
+
+/* CARD HOVER */
+
+.action-card:hover {
+    transform: translateY(-6px);
+
+    border-color: #8B1E1E;
+
+    box-shadow:
+        0 12px 30px rgba(80, 40, 30, 0.12);
+}
+
+
+/* =========================
+   ACTION IMAGE
+========================= */
+
+.action-image {
+    width: 100%;
+
+    height: 220px;
+
+    overflow: hidden;
+}
+
+.action-image img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: transform 0.5s;
+}
+
+
+/* IMAGE ZOOM ON HOVER */
+
+.action-card:hover .action-image img {
+    transform: scale(1.05);
+}
+
+
+/* =========================
+   ACTION CONTENT
+========================= */
+
+.action-content {
+    padding: 25px 30px 30px;
+
+    padding-right: 60px;
+}
+
+.action-content h3 {
+    color: #8B1E1E;
+
+    font-size: 21px;
+
+    margin-bottom: 7px;
+}
+
+.action-content p {
+    color: #705C5C;
+
+    font-size: 14px;
+
+    max-width: 400px;
+}
+
+
+/* =========================
+   ARROW
+========================= */
+
+.arrow {
+    position: absolute;
+
+    right: 25px;
+
+    bottom: 27px;
+
+    color: #8B1E1E;
+
+    font-size: 24px;
+
+    transition: 0.3s;
+}
+
+.action-card:hover .arrow {
+    transform: translateX(5px);
+}
+
+
+/* =========================
+   INFORMATION SECTION
+========================= */
+
+.info-section {
+    padding: 90px 7%;
+
+    background: #F3E6D0;
+
+    border-top: 1px solid #E1CFB5;
+}
+
+.info-content {
+    max-width: 650px;
+}
+
+.info-content h2 {
+    font-size: 42px;
+
+    color: #2B1717;
+
+    margin-bottom: 15px;
+}
+
+.info-content p {
+    color: #705C5C;
+
+    font-size: 17px;
+
+    max-width: 580px;
+}
+
+
+/* =========================
+   STAFF DASHBOARD
+========================= */
+
+.staff-dashboard {
+    min-height: calc(100vh - 78px);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 60px 7%;
+}
+
+.staff-dashboard h1 {
+    font-size: 52px;
+
+    line-height: 1.1;
+
+    margin-bottom: 15px;
+}
+
+.staff-dashboard h1 span {
+    color: #8B1E1E;
+}
+
+.staff-dashboard h2 {
+    color: #8B1E1E;
+
+    font-size: 30px;
+
+    margin-bottom: 12px;
+}
+
+.staff-dashboard p {
+    max-width: 600px;
+
+    color: #705C5C;
+
+    margin-bottom: 30px;
+}
+
+
+/* STAFF BUTTON */
+
+.staff-button {
+    display: inline-block;
+
+    padding: 14px 26px;
+
+    background: #8B1E1E;
+
+    color: #FFFFFF;
+
+    border-radius: 4px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.staff-button:hover {
+    background: #B52B2B;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    padding: 45px 7%;
+
+    background: #2B1717;
+
+    text-align: center;
+}
+
+.footer-logo {
+    color: #FFFFFF;
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 8px;
+}
+
+.footer-logo span {
+    color: #E7B98A;
+}
+
+.footer p {
+    color: #CBBABA;
+
+    font-size: 14px;
+}
+
+.footer .copyright {
+    margin-top: 10px;
+
+    color: #8F7D7D;
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 800px) {
+
+    /* NAVBAR */
+
+    .navbar {
+        min-height: 70px;
+
+        padding: 0 5%;
+    }
+
+    .nav-links {
+        gap: 12px;
+    }
+
+    .nav-links a:not(.logout-button) {
+        display: none;
+    }
+
+
+    /* WELCOME */
+
+    .welcome-section {
+        padding: 65px 5%;
+    }
+
+    .welcome-content h1 {
+        font-size: 45px;
+    }
+
+    .welcome-content p {
+        font-size: 16px;
+    }
+
+
+    /* ACTIONS */
+
+    .dashboard-section {
+        padding: 65px 5%;
+    }
+
+    .action-grid {
+        grid-template-columns: 1fr;
+
+        max-width: 600px;
+    }
+
+
+    /* IMAGES */
+
+    .action-image {
+        height: 210px;
+    }
+
+
+    /* INFORMATION */
+
+    .info-section {
+        padding: 65px 5%;
+    }
+
+    .info-content h2 {
+        font-size: 34px;
+    }
+
+
+    /* STAFF */
+
+    .staff-dashboard {
+        min-height: calc(100vh - 70px);
+
+        padding: 50px 5%;
+    }
+
+    .staff-dashboard h1 {
+        font-size: 42px;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 500px) {
+
+    /* LOGO */
+
+    .logo {
+        font-size: 21px;
+    }
+
+
+    /* LOGOUT */
+
+    .logout-button {
+        padding: 8px 14px;
+    }
+
+
+    /* WELCOME */
+
+    .welcome-content h1 {
+        font-size: 38px;
+    }
+
+
+    /* SECTION TITLE */
+
+    .section-heading h2 {
+        font-size: 30px;
+    }
+
+
+    /* ACTION CARD */
+
+    .action-card {
+        border-radius: 7px;
+    }
+
+
+    /* ACTION IMAGE */
+
+    .action-image {
+        height: 190px;
+    }
+
+
+    /* ACTION CONTENT */
+
+    .action-content {
+        padding: 22px 24px 28px;
+
+        padding-right: 50px;
+    }
+
+    .action-content h3 {
+        font-size: 18px;
+    }
+
+    .action-content p {
+        font-size: 13px;
+    }
+
+
+    /* ARROW */
+
+    .arrow {
+        right: 18px;
+
+        bottom: 24px;
+    }
+
+
+    /* INFORMATION */
+
+    .info-content h2 {
+        font-size: 30px;
+    }
+
+
+    /* STAFF */
+
+    .staff-dashboard h1 {
+        font-size: 36px;
+    }
+
+    .staff-dashboard h2 {
+        font-size: 25px;
+    }
+
+}

@@ -1,0 +1,400 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Savouré</title>
+
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav class="navbar">
+
+        <a href="{% url 'home' %}" class="logo">
+            SAVOUR<span>É</span>
+        </a>
+
+        <div class="nav-links">
+
+            {% if is_customer %}
+
+                <a href="{% url 'menu' %}">
+                    Menu
+                </a>
+
+                <a href="{% url 'my-orders' %}">
+                    My Orders
+                </a>
+
+                <a href="{% url 'my-bookings' %}">
+                    My Bookings
+                </a>
+
+            {% endif %}
+
+
+            {% if is_kitchen %}
+
+                <a href="{% url 'kitchen-dashboard' %}">
+                    Kitchen
+                </a>
+
+            {% endif %}
+
+
+            {% if is_waiter %}
+
+                <a href="{% url 'waiter-dashboard' %}">
+                    Waiter
+                </a>
+
+            {% endif %}
+
+
+            {% if is_rider %}
+
+                <a href="{% url 'rider-dashboard' %}">
+                    Delivery
+                </a>
+
+            {% endif %}
+
+
+            {% if is_manager %}
+
+                <a href="{% url 'manager-dashboard' %}">
+                    Manager
+                </a>
+
+            {% endif %}
+
+
+            <a href="{% url 'logout' %}" class="logout-button">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         CUSTOMER DASHBOARD
+    ========================== -->
+
+    {% if is_customer %}
+
+        <!-- WELCOME SECTION -->
+
+        <section class="welcome-section">
+
+            <div class="welcome-content">
+
+                <span class="eyebrow">
+                    CUSTOMER DASHBOARD
+                </span>
+
+                <h1>
+                    Welcome back,
+                    <span>{{ user.first_name }}</span>
+                </h1>
+
+                <p>
+                    Manage your orders, reservations and
+                    dining experience from one place.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- QUICK ACTIONS -->
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <span>
+                    QUICK ACTIONS
+                </span>
+
+                <h2>
+                    What would you like to do?
+                </h2>
+
+            </div>
+
+
+            <div class="action-grid">
+
+
+                <!-- ORDER FOOD -->
+
+                <a href="{% url 'menu' %}" class="action-card">
+
+                    <div class="action-image">
+
+                        <img
+                            src="{% static 'images/order-food.jpg' %}"
+                            alt="Order Food"
+                        >
+
+                    </div>
+
+                    <div class="action-content">
+
+                        <h3>
+                            Order Food
+                        </h3>
+
+                        <p>
+                            Browse our menu and choose
+                            something delicious.
+                        </p>
+
+                    </div>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <!-- BOOK TABLE -->
+
+                <a href="{% url 'book-table' %}" class="action-card">
+
+                    <div class="action-image">
+
+                        <img
+                            src="{% static 'images/book-table.jpg' %}"
+                            alt="Book a Table"
+                        >
+
+                    </div>
+
+                    <div class="action-content">
+
+                        <h3>
+                            Book a Table
+                        </h3>
+
+                        <p>
+                            Reserve a table for your
+                            next dining experience.
+                        </p>
+
+                    </div>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <!-- MY ORDERS -->
+
+                <a href="{% url 'my-orders' %}" class="action-card">
+
+                    <div class="action-image">
+
+                        <img
+                            src="{% static 'images/my-orders.jpg' %}"
+                            alt="My Orders"
+                        >
+
+                    </div>
+
+                    <div class="action-content">
+
+                        <h3>
+                            My Orders
+                        </h3>
+
+                        <p>
+                            View your orders and
+                            check their status.
+                        </p>
+
+                    </div>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <!-- MY BOOKINGS -->
+
+                <a href="{% url 'my-bookings' %}" class="action-card">
+
+                    <div class="action-image">
+
+                        <img
+                            src="{% static 'images/my-bookings.jpg' %}"
+                            alt="My Bookings"
+                        >
+
+                    </div>
+
+                    <div class="action-content">
+
+                        <h3>
+                            My Bookings
+                        </h3>
+
+                        <p>
+                            View and manage your
+                            table reservations.
+                        </p>
+
+                    </div>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- INFORMATION SECTION -->
+
+        <section class="info-section">
+
+            <div class="info-content">
+
+                <span class="eyebrow">
+                    YOUR DINING EXPERIENCE
+                </span>
+
+                <h2>
+                    Everything in one place.
+                </h2>
+
+                <p>
+                    Order your favourite meals, reserve a table
+                    and keep track of everything through your
+                    Savouré account.
+                </p>
+
+            </div>
+
+        </section>
+
+
+    <!-- =========================
+         KITCHEN DASHBOARD
+    ========================== -->
+
+    {% elif is_kitchen %}
+
+        <section class="staff-dashboard">
+
+            <span class="eyebrow">
+                STAFF PORTAL
+            </span>
+
+            <h1>
+                Welcome,
+                <span>{{ user.first_name }}</span>
+            </h1>
+
+            <h2>
+                Kitchen Staff Dashboard
+            </h2>
+
+            <p>
+                You can view incoming orders and update
+                their preparation status.
+            </p>
+
+            <a
+                href="{% url 'kitchen-dashboard' %}"
+                class="staff-button"
+            >
+                Open Kitchen Dashboard
+            </a>
+
+        </section>
+
+
+    <!-- =========================
+         WAITER DASHBOARD
+    ========================== -->
+
+    {% elif is_waiter %}
+
+        <section class="staff-dashboard">
+
+            <span class="eyebrow">
+                STAFF PORTAL
+            </span>
+
+            <h1>
+                Welcome,
+                <span>{{ user.first_name }}</span>
+            </h1>
+
+            <h2>
+                Waiter Dashboard
+            </h2>
+
+            <p>
+                You can view ready orders and serve
+                dine-in customers or handle takeaway orders.
+            </p>
+
+            <a
+                href="{% url 'waiter-dashboard' %}"
+                class="staff-button"
+            >
+                Open Waiter Dashboard
+            </a>
+
+        </section>
+
+    {% endif %}
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="footer">
+
+        <div class="footer-logo">
+            SAVOUR<span>É</span>
+        </div>
+
+        <p>
+            Good food. Great moments.
+        </p>
+
+        <p class="copyright">
+            © 2026 Savouré. All rights reserved.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

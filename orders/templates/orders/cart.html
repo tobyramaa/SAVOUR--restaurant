@@ -1,0 +1,207 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Your Order | Savouré</title>
+
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+
+
+</head>
+
+<body>
+
+
+<nav class="navbar">
+
+    <a href="{% url 'home' %}" class="logo">
+        SAVOUR<span>É</span>
+    </a>
+
+    <div class="nav-links">
+        <a href="{% url 'menu' %}">Menu</a>
+        <a href="{% url 'my-orders' %}">My Orders</a>
+        <a href="{% url 'my-bookings' %}">My Bookings</a>
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+
+        <a href="{% url 'cart' %}" class="current">
+            Your Order
+        </a>
+
+        <a href="{% url 'logout' %}" class="logout-button">
+            Logout
+        </a>
+    </div>
+
+</nav>
+
+
+<section class="cart-header">
+
+    <div class="cart-header-content">
+
+        <span class="eyebrow">YOUR ORDER</span>
+
+        <h1>
+            Review your <span>order.</span>
+        </h1>
+
+        <p>
+            Check your selected dishes before continuing
+            to checkout.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="cart-section">
+
+    {% if cart_items %}
+
+        <div class="cart-layout">
+
+            <div class="cart-items">
+
+                <div class="section-heading">
+                    <span>SELECTED ITEMS</span>
+                    <h2>Your dishes</h2>
+                </div>
+
+
+                {% for cart_item in cart_items %}
+
+                    <div class="cart-card">
+
+                        <div class="cart-image">
+
+                            {% if cart_item.item.image %}
+
+                                <img
+                                    src="{{ cart_item.item.image.url }}"
+                                    alt="{{ cart_item.item.name }}"
+                                >
+
+                            {% else %}
+
+                                <div class="no-image">
+                                    SAVOURÉ
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="cart-content">
+
+                            <h3>
+                                {{ cart_item.item.name }}
+                            </h3>
+
+                            <p class="item-price">
+                                ₦{{ cart_item.item.price }} each
+                            </p>
+
+                            <div class="cart-details">
+
+                                <div>
+                                    <span>QUANTITY</span>
+                                    <p>{{ cart_item.quantity }}</p>
+                                </div>
+
+                                <div>
+                                    <span>SUBTOTAL</span>
+                                    <p>₦{{ cart_item.subtotal }}</p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <div class="order-summary">
+
+                <span class="eyebrow">ORDER SUMMARY</span>
+
+                <h2>Your total</h2>
+
+                <div class="summary-line">
+                    <span>Items</span>
+                    <span>{{ cart_items|length }}</span>
+                </div>
+
+                <div class="summary-line total-line">
+                    <span>Total</span>
+                    <strong>₦{{ total_price }}</strong>
+                </div>
+
+                <a href="{% url 'checkout' %}" class="checkout-button">
+                    Proceed to Checkout
+                </a>
+
+                <a href="{% url 'menu' %}" class="continue-link">
+                    Continue Ordering
+                </a>
+
+            </div>
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-cart">
+
+            <span class="eyebrow">YOUR ORDER</span>
+
+            <h2>Your order is empty.</h2>
+
+            <p>
+                You haven't added any dishes to your order yet.
+                Explore our menu and choose something you enjoy.
+            </p>
+
+            <a href="{% url 'menu' %}" class="menu-button">
+                Browse Menu
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+
+<footer class="footer">
+
+    <div class="footer-logo">
+        SAVOUR<span>É</span>
+    </div>
+
+    <p>
+        Good food. Great moments.
+    </p>
+
+    <p class="copyright">
+        © 2026 Savouré. All rights reserved.
+    </p>
+
+</footer>
+
+
+</body>
+</html>

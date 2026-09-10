@@ -1,0 +1,272 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #F3E6D0;
+    color: #2B1717;
+}
+
+.register-page {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.register-image {
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            rgba(80, 20, 20, 0.25),
+            rgba(80, 20, 20, 0.65)
+        ),
+        url("../images/login-food.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    position: relative;
+}
+
+.image-overlay {
+    height: 100%;
+
+    display: flex;
+    align-items: flex-end;
+
+    padding: 60px;
+}
+
+.image-content {
+    max-width: 500px;
+    color: #FFFFFF;
+}
+
+.image-content h2 {
+    font-size: 52px;
+    line-height: 1.05;
+    margin-bottom: 20px;
+}
+
+.image-content p {
+    font-size: 18px;
+    color: #F5EBD7;
+}
+
+.register-section {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 50px;
+}
+
+.register-container {
+    width: 100%;
+    max-width: 500px;
+}
+
+.logo {
+    display: inline-block;
+
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 2px;
+
+    color: #2B1717;
+
+    margin-bottom: 40px;
+}
+
+.logo span {
+    color: #8B1E1E;
+}
+
+.register-container h1 {
+    font-size: 42px;
+    color: #2B1717;
+
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #7A6262;
+    margin-bottom: 30px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    margin-bottom: 8px;
+
+    color: #3D2525;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border: 1px solid #DCCBB2;
+    border-radius: 5px;
+
+    background: #FFF9F0;
+    color: #2B1717;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.3s;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #8B1E1E;
+
+    box-shadow:
+        0 0 0 3px rgba(139, 30, 30, 0.08);
+}
+
+.register-button {
+    width: 100%;
+
+    padding: 15px;
+
+    margin-top: 5px;
+
+    border: none;
+    border-radius: 5px;
+
+    background: #8B1E1E;
+    color: #FFFFFF;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.register-button:hover {
+    background: #B52B2B;
+    transform: translateY(-2px);
+}
+
+.error {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #B52B2B;
+    font-size: 13px;
+}
+
+.form-error {
+    padding: 12px 15px;
+
+    margin-bottom: 20px;
+
+    border-radius: 5px;
+
+    background: #FBE5E5;
+    color: #8B1E1E;
+
+    font-size: 14px;
+}
+
+.login-text {
+    text-align: center;
+
+    margin-top: 25px;
+
+    color: #7A6262;
+}
+
+.login-text a {
+    color: #8B1E1E;
+    font-weight: bold;
+}
+
+.login-text a:hover {
+    color: #B52B2B;
+}
+
+.back-home {
+    display: block;
+
+    text-align: center;
+
+    margin-top: 25px;
+
+    color: #7A6262;
+
+    font-size: 14px;
+}
+
+.back-home:hover {
+    color: #8B1E1E;
+}
+
+@media (max-width: 800px) {
+
+    .register-page {
+        grid-template-columns: 1fr;
+    }
+
+    .register-image {
+        display: none;
+    }
+
+
+    .register-section {
+        min-height: 100vh;
+        padding: 50px 25px;
+    }
+
+    .logo {
+        margin-bottom: 35px;
+    }
+
+    .register-container h1 {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .register-container h1 {
+        font-size: 32px;
+    }
+}

@@ -1,0 +1,213 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Order Confirmed | Savouré</title>
+
+<link rel="stylesheet" href="{% static 'css/order_success.css' %}">
+
+
+</head>
+
+<body>
+
+
+<nav class="navbar">
+
+    <a href="{% url 'home' %}" class="logo">
+        SAVOUR<span>É</span>
+    </a>
+
+    <div class="nav-links">
+        <a href="{% url 'menu' %}">Menu</a>
+        <a href="{% url 'my-orders' %}">My Orders</a>
+        <a href="{% url 'my-bookings' %}">My Bookings</a>
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <a href="{% url 'logout' %}" class="logout-button">
+            Logout
+        </a>
+    </div>
+
+</nav>
+
+
+<main class="success-section">
+
+    <div class="success-container">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <span class="eyebrow">ORDER CONFIRMED</span>
+
+        <h1>
+            Your order has been <span>placed.</span>
+        </h1>
+
+        <p class="success-message">
+            Thank you for choosing Savouré.
+            Your order has been received successfully.
+        </p>
+
+
+        <!-- ORDER DETAILS -->
+
+        <div class="details-card">
+
+            <div class="card-heading">
+                <span>ORDER DETAILS</span>
+                <h2>Your order</h2>
+            </div>
+
+
+            <div class="detail-row">
+
+                <span>ORDER NUMBER</span>
+
+                <strong>
+                    #{{ order.id }}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span>ORDER TYPE</span>
+
+                <strong>
+                    {{ order.get_order_type_display }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- TABLE BOOKING -->
+
+        {% if booking %}
+
+            <div class="details-card booking-card">
+
+                <div class="card-heading">
+
+                    <span>TABLE RESERVATION</span>
+
+                    <h2>Dining details</h2>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span>TABLE</span>
+
+                    <strong>
+                        Table {{ booking.table.table_number }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span>DATE</span>
+
+                    <strong>
+                        {{ booking.booking_date }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span>TIME</span>
+
+                    <strong>
+                        {{ booking.booking_time }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span>GUESTS</span>
+
+                    <strong>
+                        {{ booking.number_of_people }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span>BOOKING STATUS</span>
+
+                    <strong>
+                        {{ booking.get_status_display }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- ACTIONS -->
+
+        <div class="success-actions">
+
+            <a href="{% url 'my-orders' %}" class="primary-button">
+                View My Orders
+            </a>
+
+            <a href="{% url 'menu' %}" class="secondary-button">
+                Back to Menu
+            </a>
+
+            {% if booking %}
+
+                <a href="{% url 'my-bookings' %}" class="secondary-button">
+                    View My Bookings
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<footer class="footer">
+
+    <div class="footer-logo">
+        SAVOUR<span>É</span>
+    </div>
+
+    <p>
+        Good food. Great moments.
+    </p>
+
+    <p class="copyright">
+        © 2026 Savouré. All rights reserved.
+    </p>
+
+</footer>
+
+
+</body>
+</html>

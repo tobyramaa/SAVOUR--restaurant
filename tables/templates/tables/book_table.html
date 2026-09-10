@@ -1,0 +1,122 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Book a Table | Savouré</title>
+
+<link rel="stylesheet" href="{% static 'css/book_table.css' %}">
+
+
+</head>
+
+<body>
+
+
+<nav class="navbar">
+
+    <a href="{% url 'home' %}" class="logo">
+        SAVOUR<span>É</span>
+    </a>
+
+    <div class="nav-links">
+        <a href="{% url 'menu' %}">Menu</a>
+        <a href="{% url 'my-orders' %}">My Orders</a>
+        <a href="{% url 'my-bookings' %}">My Bookings</a>
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <a href="{% url 'logout' %}" class="logout-button">
+            Logout
+        </a>
+    </div>
+
+</nav>
+
+
+<section class="booking-header">
+
+    <div class="booking-header-content">
+
+        <span class="eyebrow">TABLE RESERVATION</span>
+
+        <h1>
+            Book a <span>Table</span>
+        </h1>
+
+        <p>
+            Choose your preferred date, time, and number
+            of people for your next dining experience.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="booking-section">
+
+    <div class="booking-container">
+
+        <div class="section-heading">
+
+            <span>RESERVATION DETAILS</span>
+
+            <h2>Plan your visit</h2>
+
+        </div>
+
+
+        <div class="booking-card">
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <button type="submit" class="booking-button">
+                    Book Table
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <div class="back-link">
+
+            <a href="{% url 'menu' %}">
+                ← Back to Menu
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer class="footer">
+
+    <div class="footer-logo">
+        SAVOUR<span>É</span>
+    </div>
+
+    <p>
+        Good food. Great moments.
+    </p>
+
+    <p class="copyright">
+        © 2026 Savouré. All rights reserved.
+    </p>
+
+</footer>
+
+
+</body>
+</html>

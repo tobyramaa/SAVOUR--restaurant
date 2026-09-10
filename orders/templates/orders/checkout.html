@@ -1,0 +1,307 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Checkout | Savouré</title>
+
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+
+
+</head>
+
+<body>
+
+
+<nav class="navbar">
+
+    <a href="{% url 'home' %}" class="logo">
+        SAVOUR<span>É</span>
+    </a>
+
+    <div class="nav-links">
+        <a href="{% url 'menu' %}">Menu</a>
+        <a href="{% url 'my-orders' %}">My Orders</a>
+        <a href="{% url 'my-bookings' %}">My Bookings</a>
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <a href="{% url 'cart' %}" class="current">Your Order</a>
+        <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+    </div>
+
+</nav>
+
+
+<section class="checkout-header">
+
+    <div class="checkout-header-content">
+
+        <span class="eyebrow">CHECKOUT</span>
+
+        <h1>
+            Complete your <span>order.</span>
+        </h1>
+
+        <p>
+            Choose how you'd like to receive your order
+            and review everything before placing it.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="checkout-section">
+
+    <div class="checkout-layout">
+
+
+        <!-- ORDER SUMMARY -->
+
+        <div class="order-details">
+
+            <div class="section-heading">
+                <span>YOUR ORDER</span>
+                <h2>Order details</h2>
+            </div>
+
+
+            <div class="checkout-items">
+
+                {% for cart_item in cart_items %}
+
+                    <div class="checkout-item">
+
+                        <div class="item-info">
+
+                            <h3>
+                                {{ cart_item.item.name }}
+                            </h3>
+
+                            <p>
+                                {{ cart_item.quantity }}
+                                ×
+                                ₦{{ cart_item.item.price }}
+                            </p>
+
+                        </div>
+
+                        <strong>
+                            ₦{{ cart_item.subtotal }}
+                        </strong>
+
+                    </div>
+
+                {% empty %}
+
+                    <p class="empty-order">
+                        Your cart is empty.
+                    </p>
+
+                {% endfor %}
+
+            </div>
+
+
+            <div class="total-row">
+
+                <span>Total</span>
+
+                <strong>
+                    ₦{{ total_price }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- CHECKOUT FORM -->
+
+        <div class="checkout-form-card">
+
+            <span class="eyebrow">ORDER OPTIONS</span>
+
+            <h2>
+                How would you like your order?
+            </h2>
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                {% if form.non_field_errors %}
+
+                    <div class="form-error">
+                        {{ form.non_field_errors }}
+                    </div>
+
+                {% endif %}
+
+
+                <!-- ORDER TYPE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Order Type
+                    </label>
+
+                    <div class="radio-options">
+
+                        {% for radio in form.order_type %}
+
+                            <label class="radio-option">
+
+                                {{ radio.tag }}
+
+                                <span>
+                                    {{ radio.choice_label }}
+                                </span>
+
+                            </label>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    {% if form.order_type.errors %}
+
+                        <div class="field-error">
+                            {{ form.order_type.errors }}
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- TABLE BOOKING -->
+
+                <div id="booking-field" class="form-group">
+
+                    <label for="{{ form.booking.id_for_label }}">
+                        Table Booking
+                    </label>
+
+                    {{ form.booking }}
+
+                    <small>
+                        Select one of your available table bookings
+                        for this dine-in order.
+                    </small>
+
+
+                    {% if form.booking.errors %}
+
+                        <div class="field-error">
+                            {{ form.booking.errors }}
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- SUBMIT -->
+
+                <button type="submit" class="place-order-button">
+                    Place Order
+                </button>
+
+                <a href="{% url 'cart' %}" class="back-link">
+                    ← Back to Cart
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer class="footer">
+
+    <div class="footer-logo">
+        SAVOUR<span>É</span>
+    </div>
+
+    <p>
+        Good food. Great moments.
+    </p>
+
+    <p class="copyright">
+        © 2026 Savouré. All rights reserved.
+    </p>
+
+</footer>
+
+
+<!-- SHOW / HIDE BOOKING -->
+
+<script>
+
+    const orderTypeInputs =
+        document.querySelectorAll(
+            'input[name="order_type"]'
+        );
+
+    const bookingField =
+        document.getElementById(
+            "booking-field"
+        );
+
+
+    function toggleBookingField() {
+
+        const selected =
+            document.querySelector(
+                'input[name="order_type"]:checked'
+            );
+
+
+        if (
+            selected &&
+            selected.value === "DINE_IN"
+        ) {
+
+            bookingField.style.display = "block";
+
+        } else {
+
+            bookingField.style.display = "none";
+
+        }
+
+    }
+
+
+    orderTypeInputs.forEach(function(input) {
+
+        input.addEventListener(
+            "change",
+            toggleBookingField
+        );
+
+    });
+
+
+    toggleBookingField();
+
+</script>
+
+
+</body>
+
+</html>

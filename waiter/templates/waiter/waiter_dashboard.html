@@ -1,0 +1,488 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Waiter Dashboard | Savouré</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/waiter_dashboard.css' %}">
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a href="{% url 'home' %}" class="logo">
+            SAVOUR<span>É</span>
+        </a>
+
+        <div class="nav-links">
+
+            <a href="{% url 'dashboard' %}">
+                Dashboard
+            </a>
+
+            <a href="{% url 'waiter-dashboard' %}" class="current">
+                Waiter
+            </a>
+
+            <a href="{% url 'logout' %}" class="logout-button">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- PAGE HEADER -->
+
+    <section class="page-header">
+
+        <div class="header-content">
+
+            <span class="eyebrow">
+                FRONT OF HOUSE
+            </span>
+
+            <h1>
+                Waiter <span>Dashboard</span>
+            </h1>
+
+            <p>
+                Welcome, {{ user.first_name }}.
+                Manage ready orders and complete customer service
+                from one place.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- READY ORDERS -->
+
+    <section class="orders-section">
+
+        <div class="section-heading">
+
+            <span>
+                ACTION REQUIRED
+            </span>
+
+            <h2>
+                Ready Orders
+            </h2>
+
+            <p>
+                Orders that are ready to be served or collected.
+            </p>
+
+        </div>
+
+
+        {% if ready_orders %}
+
+            <div class="orders-grid">
+
+                {% for order in ready_orders %}
+
+                    <div class="order-card">
+
+                        <!-- CARD HEADER -->
+
+                        <div class="order-top">
+
+                            <div>
+
+                                <span class="order-label">
+                                    ORDER
+                                </span>
+
+                                <h3>
+                                    #{{ order.id }}
+                                </h3>
+
+                            </div>
+
+                            <span class="status ready">
+                                {{ order.get_status_display }}
+                            </span>
+
+                        </div>
+
+
+                        <!-- CUSTOMER -->
+
+                        <div class="customer-info">
+
+                            <span>
+                                CUSTOMER
+                            </span>
+
+                            <p>
+                                {{ order.customer.get_full_name|default:order.customer.username }}
+                            </p>
+
+                        </div>
+
+
+                        <!-- ORDER TYPE -->
+
+                        <div class="order-type">
+
+                            <span>
+                                ORDER TYPE
+                            </span>
+
+                            <p>
+                                {{ order.get_order_type_display }}
+                            </p>
+
+                        </div>
+
+
+                        <!-- DINE-IN DETAILS -->
+
+                        {% if order.order_type == "DINE_IN" %}
+
+                            {% with booking=order.table_booking %}
+
+                                {% if booking %}
+
+                                    <div class="booking-box">
+
+                                        <div class="booking-heading">
+                                            TABLE RESERVATION
+                                        </div>
+
+                                        <div class="booking-grid">
+
+                                            <div>
+                                                <span>TABLE</span>
+
+                                                <strong>
+                                                    {{ booking.table.table_number }}
+                                                </strong>
+                                            </div>
+
+                                            <div>
+                                                <span>GUESTS</span>
+
+                                                <strong>
+                                                    {{ booking.number_of_people }}
+                                                </strong>
+                                            </div>
+
+                                            <div>
+                                                <span>DATE</span>
+
+                                                <strong>
+                                                    {{ booking.booking_date }}
+                                                </strong>
+                                            </div>
+
+                                            <div>
+                                                <span>TIME</span>
+
+                                                <strong>
+                                                    {{ booking.booking_time }}
+                                                </strong>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                {% endif %}
+
+                            {% endwith %}
+
+                        {% endif %}
+
+
+                        <!-- ITEMS -->
+
+                        <div class="items-section">
+
+                            <span class="items-title">
+                                ORDER ITEMS
+                            </span>
+
+                            <div class="items-list">
+
+                                {% for item in order.items.all %}
+
+                                    <div class="item-row">
+
+                                        <span class="quantity">
+                                            {{ item.quantity }} ×
+                                        </span>
+
+                                        <span class="item-name">
+                                            {{ item.menu_item.name }}
+                                        </span>
+
+                                    </div>
+
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ACTION -->
+
+                        <div class="order-action">
+
+                            {% if order.order_type == "DINE_IN" %}
+
+                                <form method="POST"
+                                      action="{% url 'mark-served' order.id %}">
+
+                                    {% csrf_token %}
+
+                                    <button type="submit"
+                                            class="action-button">
+
+                                        Mark as Served
+
+                                    </button>
+
+                                </form>
+
+                            {% elif order.order_type == "TAKEAWAY" %}
+
+                                <form method="POST"
+                                      action="{% url 'mark-collected' order.id %}">
+
+                                    {% csrf_token %}
+
+                                    <button type="submit"
+                                            class="action-button">
+
+                                        Mark as Collected
+
+                                    </button>
+
+                                </form>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    ✓
+                </div>
+
+                <h3>
+                    No ready orders
+                </h3>
+
+                <p>
+                    There are currently no orders waiting
+                    to be served or collected.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- COMPLETED ORDERS -->
+
+    <section class="completed-section">
+
+        <div class="section-heading">
+
+            <span>
+                SERVICE HISTORY
+            </span>
+
+            <h2>
+                Completed Orders
+            </h2>
+
+            <p>
+                Orders that have already been served or collected.
+            </p>
+
+        </div>
+
+
+        {% if completed_orders %}
+
+            <div class="completed-list">
+
+                {% for order in completed_orders %}
+
+                    <div class="completed-card">
+
+                        <div class="completed-main">
+
+                            <div class="completed-order">
+
+                                <span>
+                                    ORDER
+                                </span>
+
+                                <h3>
+                                    #{{ order.id }}
+                                </h3>
+
+                            </div>
+
+
+                            <div class="completed-customer">
+
+                                <span>
+                                    CUSTOMER
+                                </span>
+
+                                <p>
+                                    {{ order.customer.get_full_name|default:order.customer.username }}
+                                </p>
+
+                            </div>
+
+
+                            <div class="completed-type">
+
+                                <span>
+                                    TYPE
+                                </span>
+
+                                <p>
+                                    {{ order.get_order_type_display }}
+                                </p>
+
+                            </div>
+
+
+                            <div class="completed-status">
+
+                                <span class="status completed">
+                                    {{ order.get_status_display }}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        {% if order.order_type == "DINE_IN" %}
+
+                            {% with booking=order.table_booking %}
+
+                                {% if booking %}
+
+                                    <div class="completed-table">
+
+                                        <span>
+                                            TABLE
+                                        </span>
+
+                                        <strong>
+                                            {{ booking.table.table_number }}
+                                        </strong>
+
+                                    </div>
+
+                                {% endif %}
+
+                            {% endwith %}
+
+                        {% endif %}
+
+
+                        <div class="completed-items">
+
+                            <span>
+                                ITEMS
+                            </span>
+
+                            <div>
+
+                                {% for item in order.items.all %}
+
+                                    <p>
+                                        {{ item.quantity }} ×
+                                        {{ item.menu_item.name }}
+                                    </p>
+
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-state light">
+
+                <h3>
+                    No completed orders
+                </h3>
+
+                <p>
+                    Completed waiter orders will appear here.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div class="footer-logo">
+            SAVOUR<span>É</span>
+        </div>
+
+        <p>
+            Good food. Great moments.
+        </p>
+
+        <p class="copyright">
+            © 2026 Savouré. All rights reserved.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

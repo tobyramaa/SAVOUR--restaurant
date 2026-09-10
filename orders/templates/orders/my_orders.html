@@ -1,0 +1,270 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Orders | Savouré</title>
+
+    <link rel="stylesheet" href="{% static 'css/my_orders.css' %}">
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav class="navbar">
+
+        <a href="{% url 'home' %}" class="logo">
+            SAVOUR<span>É</span>
+        </a>
+
+        <div class="nav-links">
+
+            <a href="{% url 'menu' %}">
+                Menu
+            </a>
+
+            <a href="{% url 'my-orders' %}" class="current">
+                My Orders
+            </a>
+
+            <a href="{% url 'my-bookings' %}">
+                My Bookings
+            </a>
+
+            <a href="{% url 'dashboard' %}">
+                Dashboard
+            </a>
+
+            <a href="{% url 'logout' %}" class="logout-button">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         PAGE HEADER
+    ========================== -->
+
+    <section class="orders-header">
+
+        <div class="orders-header-content">
+
+            <span class="eyebrow">
+                ORDER HISTORY
+            </span>
+
+            <h1>
+                My <span>Orders</span>
+            </h1>
+
+            <p>
+                View your recent orders, check their status
+                and keep track of your dining experience.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ORDERS SECTION
+    ========================== -->
+
+    <section class="orders-section">
+
+        <div class="section-heading">
+
+            <span>
+                YOUR ORDERS
+            </span>
+
+            <h2>
+                Recent orders
+            </h2>
+
+        </div>
+
+
+        {% if orders %}
+
+            <div class="orders-list">
+
+                {% for order in orders %}
+
+                    <!-- =========================
+                         ORDER CARD
+                    ========================== -->
+
+                    <div class="order-card">
+
+                        <!-- ORDER TOP -->
+
+                        <div class="order-top">
+
+                            <div>
+                                <h3>
+                                    Order #{{ order.id }}
+                                </h3>
+
+                                <p>
+                                    {{ order.get_order_type_display }}
+                                    ·
+                                    {{ order.created_at|date:"F j, Y" }}
+                                </p>
+                            </div>
+
+                            <div class="order-status">
+                                {{ order.get_status_display }}
+                            </div>
+
+                        </div>
+
+
+                        <!-- ORDER ITEMS -->
+
+                        <div class="order-content">
+
+                            <h4>
+                                ORDER ITEMS
+                            </h4>
+
+                            {% for item in order.items.all %}
+
+                                <div class="item-row">
+
+                                    <div>
+                                        <span class="quantity">
+                                            {{ item.quantity }} ×
+                                        </span>
+
+                                        {{ item.menu_item.name }}
+                                    </div>
+
+                                    <span class="price">
+                                        ₦{{ item.price }}
+                                    </span>
+
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- TABLE BOOKING -->
+
+                        {% if order.table_booking %}
+
+                            <div class="booking-info">
+
+                                <h4>
+                                    TABLE BOOKING
+                                </h4>
+
+                                <p>
+                                    Table
+                                    {{ order.table_booking.table.table_number }}
+                                    ·
+                                    {{ order.table_booking.booking_date }}
+                                    ·
+                                    {{ order.table_booking.booking_time }}
+                                    ·
+                                    {{ order.table_booking.number_of_people }}
+                                    guests
+                                </p>
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <!-- ORDER TOTAL -->
+
+                        <div class="order-footer">
+
+                            <span>
+                                Total
+                            </span>
+
+                            <strong>
+                                ₦{{ order.total_price }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+        {% else %}
+
+            <!-- =========================
+                 NO ORDERS
+            ========================== -->
+
+            <div class="empty-orders">
+
+                <span class="eyebrow">
+                    YOUR ORDERS
+                </span>
+
+                <h3>
+                    Nothing here yet.
+                </h3>
+
+                <p>
+                    You haven't placed an order yet.
+                    Browse our menu and find something you love.
+                </p>
+
+                <a
+                    href="{% url 'menu' %}"
+                    class="menu-button"
+                >
+                    Browse Menu
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="footer">
+
+        <div class="footer-logo">
+            SAVOUR<span>É</span>
+        </div>
+
+        <p>
+            Good food. Great moments.
+        </p>
+
+        <p class="copyright">
+            © 2026 Savouré. All rights reserved.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

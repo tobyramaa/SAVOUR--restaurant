@@ -1,0 +1,353 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Kitchen Dashboard | Savouré</title>
+
+<link rel="stylesheet" href="{% static 'css/kitchen_dashboard.css' %}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <a href="{% url 'home' %}" class="logo">
+        SAVOUR<span>É</span>
+    </a>
+
+    <div class="nav-links">
+
+        <a href="{% url 'dashboard' %}">
+            Dashboard
+        </a>
+
+        <a href="{% url 'kitchen-dashboard' %}" class="current">
+            Kitchen
+        </a>
+
+        <a href="{% url 'logout' %}" class="logout-button">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<main class="kitchen-section">
+
+    <div class="page-header">
+
+        <span class="eyebrow">KITCHEN OPERATIONS</span>
+
+        <h1>
+            Kitchen <span>Dashboard</span>
+        </h1>
+
+        <p>
+            Welcome, {{ user.first_name }}. Manage incoming
+            orders and keep track of meals ready for service.
+        </p>
+
+    </div>
+
+
+    <!-- INCOMING ORDERS -->
+
+    <section class="orders-section">
+
+        <div class="section-heading">
+
+            <span>ACTIVE ORDERS</span>
+
+            <h2>Incoming Orders</h2>
+
+        </div>
+
+
+        {% if incoming_orders %}
+
+            <div class="orders-grid">
+
+                {% for order in incoming_orders %}
+
+                    <div class="order-card">
+
+                        <div class="order-top">
+
+                            <div>
+                                <span class="order-label">
+                                    ORDER
+                                </span>
+
+                                <h3>
+                                    #{{ order.id }}
+                                </h3>
+                            </div>
+
+                            <span class="status
+                                {% if order.status == 'PENDING' %}
+                                    pending
+                                {% elif order.status == 'PREPARING' %}
+                                    preparing
+                                {% endif %}">
+                                {{ order.get_status_display }}
+                            </span>
+
+                        </div>
+
+
+                        <div class="customer-info">
+
+                            <span>CUSTOMER</span>
+
+                            <p>
+                                {{ order.customer.get_full_name|default:order.customer.username }}
+                            </p>
+
+                        </div>
+
+
+                        <div class="order-type">
+
+                            <span>ORDER TYPE</span>
+
+                            <p>
+                                {{ order.get_order_type_display }}
+                            </p>
+
+                        </div>
+
+
+                        <div class="items-section">
+
+                            <span>ITEMS</span>
+
+                            <div class="items-list">
+
+                                {% for item in order.items.all %}
+
+                                    <div class="item-row">
+
+                                        <strong>
+                                            {{ item.quantity }} ×
+                                        </strong>
+
+                                        <p>
+                                            {{ item.menu_item.name }}
+                                        </p>
+
+                                    </div>
+
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="order-action">
+
+                            {% if order.status == "PENDING" %}
+
+                                <form method="POST"
+                                      action="{% url 'mark-preparing' order.id %}">
+
+                                    {% csrf_token %}
+
+                                    <button type="submit">
+                                        Start Preparing
+                                    </button>
+
+                                </form>
+
+
+                            {% elif order.status == "PREPARING" %}
+
+                                <form method="POST"
+                                      action="{% url 'mark-ready' order.id %}">
+
+                                    {% csrf_token %}
+
+                                    <button type="submit">
+                                        Mark as Ready
+                                    </button>
+
+                                </form>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-state">
+
+                <span class="empty-label">
+                    ACTIVE ORDERS
+                </span>
+
+                <h3>No incoming orders.</h3>
+
+                <p>
+                    There are currently no orders waiting
+                    to be prepared.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- READY ORDERS -->
+
+    <section class="orders-section ready-section">
+
+        <div class="section-heading">
+
+            <span>COMPLETED IN KITCHEN</span>
+
+            <h2>Ready Orders</h2>
+
+        </div>
+
+
+        {% if ready_orders %}
+
+            <div class="orders-grid">
+
+                {% for order in ready_orders %}
+
+                    <div class="order-card ready-card">
+
+                        <div class="order-top">
+
+                            <div>
+                                <span class="order-label">
+                                    ORDER
+                                </span>
+
+                                <h3>
+                                    #{{ order.id }}
+                                </h3>
+                            </div>
+
+                            <span class="status ready">
+                                {{ order.get_status_display }}
+                            </span>
+
+                        </div>
+
+
+                        <div class="customer-info">
+
+                            <span>CUSTOMER</span>
+
+                            <p>
+                                {{ order.customer.get_full_name|default:order.customer.username }}
+                            </p>
+
+                        </div>
+
+
+                        <div class="order-type">
+
+                            <span>ORDER TYPE</span>
+
+                            <p>
+                                {{ order.get_order_type_display }}
+                            </p>
+
+                        </div>
+
+
+                        <div class="items-section">
+
+                            <span>ITEMS</span>
+
+                            <div class="items-list">
+
+                                {% for item in order.items.all %}
+
+                                    <div class="item-row">
+
+                                        <strong>
+                                            {{ item.quantity }} ×
+                                        </strong>
+
+                                        <p>
+                                            {{ item.menu_item.name }}
+                                        </p>
+
+                                    </div>
+
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-state">
+
+                <span class="empty-label">
+                    COMPLETED IN KITCHEN
+                </span>
+
+                <h3>No ready orders.</h3>
+
+                <p>
+                    Orders marked as ready will appear here.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+</main>
+
+
+<footer class="footer">
+
+    <div class="footer-logo">
+        SAVOUR<span>É</span>
+    </div>
+
+    <p>
+        Good food. Great moments.
+    </p>
+
+    <p class="copyright">
+        © 2026 Savouré. All rights reserved.
+    </p>
+
+</footer>
+
+</body>
+
+</html>
