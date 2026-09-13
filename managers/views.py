@@ -181,3 +181,49 @@ def delete_staff(request, staff_id):
         "manager-staff-list"
     )
 
+@login_required
+def edit_staff(request, staff_id):
+
+    staff = get_object_or_404(
+        StaffProfile,
+        id=staff_id
+    )
+
+    user = staff.user
+
+    if request.method == "POST":
+
+        user.first_name = request.POST.get("first_name", "").strip()
+        user.last_name = request.POST.get("last_name", "").strip()
+        user.email = request.POST.get("email", "").strip()
+
+        staff.phone_number = request.POST.get(
+            "phone_number",
+            ""
+        ).strip()
+
+        staff.address = request.POST.get(
+            "address",
+            ""
+        ).strip()
+
+        staff.position = request.POST.get(
+            "position",
+            ""
+        ).strip()
+
+        user.save()
+        staff.save()
+
+        return redirect(
+            "manager-staff-detail",
+            staff_id=staff.id
+        )
+
+    return render(
+        request,
+        "managers/edit_staff.html",
+        {
+            "staff": staff
+        }
+    )

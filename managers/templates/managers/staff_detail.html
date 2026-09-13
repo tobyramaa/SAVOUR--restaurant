@@ -19,18 +19,16 @@
 
 <body>
 
-    <div class="staff-detail-container">
+    <main class="staff-detail-container">
 
         <div class="page-header">
 
             <div>
-
                 <h1>Staff Details</h1>
 
                 <p>
                     View information about this staff member.
                 </p>
-
             </div>
 
             <a href="{% url 'manager-staff-list' %}"
@@ -53,18 +51,15 @@
 
                 </div>
 
-                <div>
+
+                <div class="staff-heading">
 
                     <h2>
-
                         {{ staff.user.get_full_name|default:staff.user.username }}
-
                     </h2>
 
                     <p>
-
                         {{ staff.position }}
-
                     </p>
 
                 </div>
@@ -73,7 +68,6 @@
 
 
             <div class="details-grid">
-
 
                 <div class="detail-box">
 
@@ -130,7 +124,7 @@
                 <div class="detail-box">
 
                     <span class="detail-label">
-                        Email Address
+                        Email
                     </span>
 
                     <span class="detail-value">
@@ -153,7 +147,7 @@
                 </div>
 
 
-                <div class="detail-box">
+                <div class="detail-box full-width">
 
                     <span class="detail-label">
                         Address
@@ -191,12 +185,20 @@
             </div>
 
 
-            <div class="actions">
+            <div class="staff-actions">
+
+                <a href="{% url 'edit-staff' staff.id %}"
+                   class="action-button edit-button">
+
+                    Edit Staff
+
+                </a>
+
 
                 <a href="{% url 'manager-staff-list' %}"
                    class="action-button return-button">
 
-                    ← Back to Staff
+                    Back to Staff
 
                 </a>
 
@@ -204,7 +206,7 @@
 
         </div>
 
-    </div>
+    </main>
 
 </body>
 

@@ -1,0 +1,214 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Staff | Savouré</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/edit_staff.css' %}">
+
+</head>
+
+<body>
+
+    <main class="edit-staff-container">
+
+        <div class="page-header">
+
+            <div>
+                <h1>Edit Staff</h1>
+
+                <p>
+                    Update this staff member's information.
+                </p>
+            </div>
+
+            <a href="{% url 'manager-staff-detail' staff.id %}"
+               class="back-button">
+
+                ← Back to Details
+
+            </a>
+
+        </div>
+
+
+        <div class="edit-card">
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <div class="form-section">
+
+                    <h2>Personal Information</h2>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="first_name">
+                                First Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="first_name"
+                                name="first_name"
+                                value="{{ staff.user.first_name }}"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="last_name">
+                                Last Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="last_name"
+                                name="last_name"
+                                value="{{ staff.user.last_name }}"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="email">
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value="{{ staff.user.email }}"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="phone_number">
+                                Phone Number
+                            </label>
+
+                            <input
+                                type="text"
+                                id="phone_number"
+                                name="phone_number"
+                                value="{{ staff.phone_number }}"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="position">
+                                Position
+                            </label>
+
+                            <select
+                                id="position"
+                                name="position"
+                                required
+                            >
+
+                                <option value="Manager"
+                                    {% if staff.position == "Manager" %}selected{% endif %}>
+                                    Manager
+                                </option>
+
+                                <option value="Waiter"
+                                    {% if staff.position == "Waiter" %}selected{% endif %}>
+                                    Waiter
+                                </option>
+
+                                <option value="Kitchen Staff"
+                                    {% if staff.position == "Kitchen Staff" %}selected{% endif %}>
+                                    Kitchen Staff
+                                </option>
+
+                                <option value="Rider"
+                                    {% if staff.position == "Rider" %}selected{% endif %}>
+                                    Rider
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-section">
+
+                    <h2>Address</h2>
+
+                    <div class="form-group">
+
+                        <label for="address">
+                            Address
+                        </label>
+
+                        <textarea
+                            id="address"
+                            name="address"
+                            rows="4"
+                        >{{ staff.address }}</textarea>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <a href="{% url 'manager-staff-detail' staff.id %}"
+                       class="cancel-button">
+
+                        Cancel
+
+                    </a>
+
+
+                    <button type="submit"
+                            class="save-button">
+
+                        Save Changes
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>
