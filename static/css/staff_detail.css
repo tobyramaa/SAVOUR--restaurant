@@ -1,0 +1,228 @@
+
+
+.staff-detail-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 25px;
+}
+
+
+/* =========================================
+   PAGE HEADER
+   ========================================= */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: 28px;
+    color: #222;
+}
+
+.page-header p {
+    margin-top: 8px;
+    color: #777;
+}
+
+
+/* =========================================
+   BACK BUTTON
+   ========================================= */
+
+.back-button {
+    text-decoration: none;
+    padding: 11px 18px;
+    border-radius: 8px;
+    background: #222;
+    color: white;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+.back-button:hover {
+    background: #444;
+}
+
+
+/* =========================================
+   STAFF CARD
+   ========================================= */
+
+.staff-card {
+    background: white;
+    border-radius: 14px;
+    padding: 30px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================
+   PROFILE HEADER
+   ========================================= */
+
+.staff-profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+}
+
+.staff-avatar {
+    width: 75px;
+    height: 75px;
+    min-width: 75px;
+    border-radius: 50%;
+    background: #222;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.staff-profile-header h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #222;
+}
+
+.staff-profile-header p {
+    margin: 6px 0 0;
+    color: #777;
+}
+
+
+/* =========================================
+   DETAILS GRID
+   ========================================= */
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.detail-box {
+    background: #f8f8f8;
+    border-radius: 10px;
+    padding: 18px;
+    border: 1px solid #eeeeee;
+}
+
+.detail-label {
+    display: block;
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 7px;
+}
+
+.detail-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #222;
+    word-break: break-word;
+}
+
+
+/* =========================================
+   ACCOUNT STATUS
+   ========================================= */
+
+.status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.status-active {
+    background: #e7f7ed;
+    color: #16803c;
+}
+
+.status-inactive {
+    background: #fdeaea;
+    color: #c62828;
+}
+
+
+/* =========================================
+   ACTIONS
+   ========================================= */
+
+.actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #eee;
+}
+
+.action-button {
+    display: inline-block;
+    text-decoration: none;
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.return-button {
+    background: #eeeeee;
+    color: #222;
+}
+
+.return-button:hover {
+    background: #dddddd;
+}
+
+
+/* =========================================
+   MOBILE RESPONSIVENESS
+   ========================================= */
+
+@media (max-width: 700px) {
+
+    .staff-detail-container {
+        margin: 25px auto;
+        padding: 0 15px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .staff-profile-header {
+        align-items: flex-start;
+    }
+
+    .staff-card {
+        padding: 22px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .action-button {
+        text-align: center;
+    }
+
+}

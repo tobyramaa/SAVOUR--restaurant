@@ -1,0 +1,211 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Staff Details | Savouré</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/staff_detail.css' %}">
+
+</head>
+
+<body>
+
+    <div class="staff-detail-container">
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>Staff Details</h1>
+
+                <p>
+                    View information about this staff member.
+                </p>
+
+            </div>
+
+            <a href="{% url 'staff_list' %}"
+               class="back-button">
+
+                ← Back to Staff
+
+            </a>
+
+        </div>
+
+
+        <div class="staff-card">
+
+            <div class="staff-profile-header">
+
+                <div class="staff-avatar">
+
+                    {{ staff.user.first_name|first|default:staff.user.username|first|upper }}
+
+                </div>
+
+                <div>
+
+                    <h2>
+
+                        {{ staff.user.get_full_name|default:staff.user.username }}
+
+                    </h2>
+
+                    <p>
+
+                        {{ staff.position }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail-box">
+
+                    <span class="detail-label">
+                        Username
+                    </span>
+
+                    <span class="detail-value">
+                        {{ staff.user.username }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <span class="detail-label">
+                        Position
+                    </span>
+
+                    <span class="detail-value">
+                        {{ staff.position }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <span class="detail-label">
+                        First Name
+                    </span>
+
+                    <span class="detail-value">
+                        {{ staff.user.first_name|default:"Not provided" }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <span class="detail-label">
+                        Last Name
+                    </span>
+
+                    <span class="detail-value">
+                        {{ staff.user.last_name|default:"Not provided" }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <span class="detail-label">
+                        Email Address
+                    </span>
+
+                    <span class="detail-value">
+                        {{ staff.user.email|default:"Not provided" }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <span class="detail-label">
+                        Phone Number
+                    </span>
+
+                    <span class="detail-value">
+                        {{ staff.phone_number|default:"Not provided" }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <span class="detail-label">
+                        Address
+                    </span>
+
+                    <span class="detail-value">
+                        {{ staff.address|default:"Not provided" }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-box">
+
+                    <span class="detail-label">
+                        Account Status
+                    </span>
+
+                    {% if staff.user.is_active %}
+
+                        <span class="status status-active">
+                            Active
+                        </span>
+
+                    {% else %}
+
+                        <span class="status status-inactive">
+                            Inactive
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <div class="actions">
+
+                <a href="{% url 'staff_list' %}"
+                   class="action-button return-button">
+
+                    ← Back to Staff
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
