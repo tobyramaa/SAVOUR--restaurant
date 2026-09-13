@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+body {
+font-family: Arial, Helvetica, sans-serif;
+background: #F3E6D0;
+color: #2B1717;
+min-height: 100vh;
+}
+
+.activation-page {
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 40px 20px;
+}
+
+.activation-card {
+width: 100%;
+max-width: 500px;
+background: #FFF9F0;
+border: 1px solid #DDC9AC;
+padding: 45px;
+box-shadow: 0 10px 30px rgba(43, 23, 23, 0.08);
+}
+
+.brand {
+text-align: center;
+color: #8B1E1E;
+font-size: 25px;
+font-weight: bold;
+letter-spacing: 3px;
+margin-bottom: 35px;
+}
+
+.header {
+text-align: center;
+margin-bottom: 30px;
+}
+
+.eyebrow {
+color: #8B1E1E;
+font-size: 11px;
+font-weight: bold;
+letter-spacing: 2px;
+margin-bottom: 10px;
+}
+
+h1 {
+font-family: Georgia, "Times New Roman", serif;
+font-size: 32px;
+font-weight: normal;
+color: #2B1717;
+margin-bottom: 12px;
+}
+
+.intro {
+color: #705C5C;
+font-size: 14px;
+line-height: 1.7;
+}
+
+.form-fields p {
+margin-bottom: 20px;
+}
+
+.form-fields label {
+display: block;
+margin-bottom: 8px;
+color: #2B1717;
+font-size: 13px;
+font-weight: bold;
+}
+
+.form-fields input {
+width: 100%;
+padding: 13px 14px;
+border: 1px solid #DDC9AC;
+background: #FFF9F0;
+color: #2B1717;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 14px;
+outline: none;
+}
+
+.form-fields input:focus {
+border-color: #8B1E1E;
+}
+
+.form-fields ul {
+margin: 8px 0 0 18px;
+color: #705C5C;
+font-size: 12px;
+line-height: 1.6;
+}
+
+.form-fields .helptext {
+display: block;
+margin-top: 7px;
+color: #705C5C;
+font-size: 12px;
+line-height: 1.5;
+}
+
+.form-fields .errorlist {
+color: #7B3730;
+font-size: 12px;
+margin-bottom: 7px;
+}
+
+button {
+width: 100%;
+border: 1px solid #2B1717;
+background: #2B1717;
+color: #FFF9F0;
+padding: 14px 20px;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 13px;
+font-weight: bold;
+letter-spacing: 0.5px;
+cursor: pointer;
+transition: 0.2s ease;
+}
+
+button:hover {
+background: #8B1E1E;
+border-color: #8B1E1E;
+}
+
+.footer-note {
+text-align: center;
+margin-top: 25px;
+padding-top: 20px;
+border-top: 1px solid #E3D1B7;
+color: #705C5C;
+font-size: 11px;
+}
+
+@media (max-width: 600px) {
+
+.activation-page {
+    padding: 25px 15px;
+}
+
+.activation-card {
+    padding: 30px 25px;
+}
+
+h1 {
+    font-size: 27px;
+}
+
+
+}

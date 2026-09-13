@@ -1,23 +1,77 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
+
 <head>
-    <title>Activate Account</title>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Activate Account | Savouré</title>
+
+<link rel="stylesheet"
+      href="{% static 'css/activate_account.css' %}">
+
 </head>
+
 <body>
 
-    <h1>Activate Your Account</h1>
 
-    <p>Create a password to activate your staff account.</p>
+<main class="activation-page">
 
-    <form method="POST">
-        {% csrf_token %}
+    <div class="activation-card">
 
-        {{ form.as_p }}
+        <div class="brand">
+            SAVOURÉ
+        </div>
 
-        <button type="submit">
-            Activate Account
-        </button>
-    </form>
+        <div class="header">
+
+            <p class="eyebrow">
+                STAFF ACCOUNT
+            </p>
+
+            <h1>
+                Activate Your Account
+            </h1>
+
+            <p class="intro">
+                Create a password to activate your staff account
+                and gain access to the restaurant management system.
+            </p>
+
+        </div>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="form-fields">
+
+                {{ form.as_p }}
+
+            </div>
+
+            <button type="submit">
+                Activate Account
+            </button>
+
+        </form>
+
+        <p class="footer-note">
+            Savouré Restaurant Management System
+        </p>
+
+    </div>
+
+</main>
+
 
 </body>
+
 </html>
