@@ -241,7 +241,7 @@ def staff_create(request):
             # Send activation email using Resend
             resend.Emails.send(
                 {
-                    "from": "Savouré Restaurant <onboarding@resend.dev>",
+                    "from": "Savouré Restaurant <noreply@savoure.com.ng>",
                     "to": [user.email],
                     "subject": "Activate Your Staff Account",
                     "html": f"""
