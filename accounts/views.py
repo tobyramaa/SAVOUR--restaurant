@@ -3,14 +3,30 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.contrib.auth.forms import AuthenticationForm
-from django.core.mail import send_mail
 
-from .forms import RegistrationForm,StaffCreateForm,StaffActivationForm
+from .forms import (
+    RegistrationForm,
+    StaffCreateForm,
+    StaffActivationForm
+)
 
-from .models import CustomerProfile,StaffProfile,KitchenProfile,RiderProfile
+from .models import (
+    CustomerProfile,
+    StaffProfile,
+    KitchenProfile,
+    RiderProfile
+)
+
 import secrets
+import resend
+import os
+
 from datetime import timedelta
 from django.utils import timezone
+
+
+# Resend API key
+resend.api_key = os.environ.get("RESEND_API_KEY")
 
 
 def home(request):
@@ -63,6 +79,8 @@ def register(request):
         "accounts/register.html",
         {"form": form}
     )
+
+
 @login_required
 def dashboard(request):
 
@@ -73,30 +91,25 @@ def dashboard(request):
 
         return redirect("manager-dashboard")
 
-
     # Customer
     is_customer = request.user.groups.filter(
         name="Customer"
     ).exists()
-
 
     # Kitchen Staff
     is_kitchen = request.user.groups.filter(
         name="Kitchen Staff"
     ).exists()
 
-
     # Waiter
     is_waiter = request.user.groups.filter(
         name="Waiter"
     ).exists()
 
-
     # Rider
     is_rider = request.user.groups.filter(
         name="Rider"
     ).exists()
-
 
     return render(
         request,
@@ -162,28 +175,24 @@ def staff_create(request):
         if form.is_valid():
 
             phone_number = form.cleaned_data.get("phone_number")
-
             address = form.cleaned_data.get("address")
-
             position = form.cleaned_data.get("position")
-
             role = form.cleaned_data.get("role")
-
             vehicle_type = form.cleaned_data.get("vehicle_type")
-
             vehicle_number = form.cleaned_data.get("vehicle_number")
 
             # Generate activation token
             activation_token = secrets.token_hex(32)
 
             # Token expires after 24 hours
-            activation_expires_at = (timezone.now()+ timedelta(hours=24))
+            activation_expires_at = (
+                timezone.now() + timedelta(hours=24)
+            )
 
             # Create staff user
             user = form.save(commit=False)
 
             user.set_unusable_password()
-
             user.is_active = False
 
             user.save()
@@ -229,31 +238,47 @@ def staff_create(request):
             print("ACTIVATION LINK:")
             print(activation_link)
 
-            # Send activation email
-            send_mail(
-                subject="Activate Your Staff Account",
+            # Send activation email using Resend
+            resend.Emails.send(
+                {
+                    "from": "Savouré Restaurant <onboarding@resend.dev>",
+                    "to": [user.email],
+                    "subject": "Activate Your Staff Account",
+                    "html": f"""
+                        <h2>Welcome to Savouré Restaurant</h2>
 
-                message=f"""
-Hello {user.first_name},
+                        <p>Hello {user.first_name},</p>
 
-Your staff account has been created.
+                        <p>
+                            Your staff account has been created.
+                        </p>
 
-Your username is: {user.username}
+                        <p>
+                            <strong>Username:</strong>
+                            {user.username}
+                        </p>
 
-Please click the link below to activate your account and create your password:
+                        <p>
+                            Please click the link below to activate
+                            your account and create your password.
+                        </p>
 
-{activation_link}
+                        <p>
+                            <a href="{activation_link}">
+                                Activate Your Staff Account
+                            </a>
+                        </p>
 
-This activation link will expire in 24 hours.
+                        <p>
+                            This activation link will expire in
+                            24 hours.
+                        </p>
 
-Thank you.
-""",
-
-                from_email=None,
-
-                recipient_list=[
-                    user.email
-                ],
+                        <p>
+                            Thank you.
+                        </p>
+                    """
+                }
             )
 
             return redirect("dashboard")
@@ -317,7 +342,6 @@ def activate_staff(request, token):
 
             # Clear activation token
             staff.activation_token = None
-
             staff.activation_expires_at = None
 
             staff.save()
