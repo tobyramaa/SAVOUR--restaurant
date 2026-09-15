@@ -6,7 +6,6 @@ The system provides separate functionalities for **customers, managers, waiters,
 
 ##  Live Project
 
-**Website:** https://savoure.com.ng/
 
 **Railway URL:** https://savour-restaurant-production.up.railway.app/
 
