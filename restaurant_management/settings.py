@@ -32,6 +32,7 @@ SECRET_KEY = os.getenv(
     "django-insecure-development-key"
 )
 
+
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
 
