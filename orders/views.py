@@ -165,3 +165,66 @@ def my_orders(request):
         "orders/my_orders.html",
         {"orders": orders}
     )
+
+@login_required
+def manager_orders(request):
+
+    if not request.user.groups.filter(
+        name="Manager"
+    ).exists():
+        return redirect("dashboard")
+
+    orders = Order.objects.select_related(
+        "customer"
+    ).prefetch_related(
+        "items__menu_item"
+    ).order_by(
+        "-created_at"
+    )
+
+    return render(
+        request,
+        "orders/manager_orders.html",
+        {
+            "orders": orders,
+        }
+    )
+
+
+
+@login_required
+def manager_order_detail(request, order_id):
+
+    if not request.user.groups.filter(
+        name="Manager"
+    ).exists():
+        return redirect("dashboard")
+
+    order = get_object_or_404(
+        Order.objects.select_related(
+            "customer"
+        ).prefetch_related(
+            "items__menu_item"
+        ),
+        id=order_id
+    )
+
+    order_items = []
+
+    for item in order.items.all():
+
+        subtotal = item.price * item.quantity
+
+        order_items.append({
+            "item": item,
+            "subtotal": subtotal,
+        })
+
+    return render(
+        request,
+        "orders/manager_order_detail.html",
+        {
+            "order": order,
+            "order_items": order_items,
+        }
+    )

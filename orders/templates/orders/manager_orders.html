@@ -1,0 +1,255 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manager Orders | Savouré</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/manager_orders.css' %}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="logo">
+            SAVOUR<span>É</span>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="{% url 'manager-dashboard' %}">
+                Dashboard
+            </a>
+
+            <a href="{% url 'manager-menu' %}">
+                Menu
+            </a>
+
+            <a href="{% url 'manager-orders' %}">
+                Orders
+            </a>
+
+            <a href="{% url 'logout' %}"
+               class="logout-button">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="dashboard-container">
+
+        <!-- PAGE INTRO -->
+        <section class="welcome-section">
+
+            <p class="small-heading">
+                ORDER MANAGEMENT
+            </p>
+
+            <h1>
+                Orders
+            </h1>
+
+            <p>
+                Monitor restaurant orders and their current status.
+            </p>
+
+        </section>
+
+
+        <!-- ORDERS -->
+        <section class="orders-section">
+
+            <div class="section-heading">
+
+                <h2>
+                    All Orders
+                </h2>
+
+                <p>
+                    {{ orders|length }}
+                    order{{ orders|length|pluralize }}
+                    in the system
+                </p>
+
+            </div>
+
+
+            {% if orders %}
+
+                <div class="orders-table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Order</th>
+                                <th>Customer</th>
+                                <th>Type</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for order in orders %}
+
+                                <tr>
+
+                                    <!-- ORDER NUMBER -->
+                                    <td class="order-number">
+                                        #{{ order.id }}
+                                    </td>
+
+
+                                    <!-- CUSTOMER -->
+                                    <td>
+
+                                        <div class="customer-name">
+
+                                            {{ order.customer.get_full_name|default:order.customer.username }}
+
+                                        </div>
+
+                                        <div class="customer-username">
+
+                                            @{{ order.customer.username }}
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <!-- ORDER TYPE -->
+                                    <td class="order-type">
+
+                                        {{ order.get_order_type_display }}
+
+                                    </td>
+
+
+                                    <!-- TOTAL -->
+                                    <td class="price">
+
+                                        ₦{{ order.total_price|floatformat:2 }}
+
+                                    </td>
+
+
+                                    <!-- STATUS -->
+                                    <td>
+
+                                        <span class="status status-{{ order.status|lower }}">
+
+                                            {{ order.get_status_display }}
+
+                                        </span>
+
+                                    </td>
+
+
+                                    <!-- DATE -->
+                                    <td class="date">
+
+                                        {{ order.created_at|date:"d M Y" }}
+
+                                        <span class="date-time">
+
+                                            {{ order.created_at|time:"h:i A" }}
+
+                                        </span>
+
+                                    </td>
+
+
+                                    <!-- VIEW -->
+                                    <td>
+
+                                        <a href="{% url 'manager-order-detail' order.id %}"
+                                           class="view-button">
+
+                                            View
+
+                                        </a>
+
+                                    </td>
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+            {% else %}
+
+                <div class="empty-state">
+
+                    <h3>
+                        No Orders Yet
+                    </h3>
+
+                    <p>
+                        Customer orders will appear here once they are placed.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <div>
+
+                <div class="footer-logo">
+                    SAVOUR<span>É</span>
+                </div>
+
+                <p>
+                    Restaurant Management System
+                </p>
+
+            </div>
+
+
+            <div class="footer-right">
+
+                <p>
+                    © 2026 SAVOURÉ Restaurant Management System
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>

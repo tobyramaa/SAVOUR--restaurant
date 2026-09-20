@@ -1,0 +1,284 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manage Tables | Savouré</title>
+
+<link rel="stylesheet" href="{% static 'css/manager_tables.css' %}">
+
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        SAVOUR<span>É</span>
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="{% url 'manager-dashboard' %}">
+            Dashboard
+        </a>
+
+        <a href="{% url 'manager-menu' %}">
+            Menu
+        </a>
+
+        <a href="{% url 'manager-orders' %}">
+            Orders
+        </a>
+
+        <a href="{% url 'manager-tables' %}">
+            Tables
+        </a>
+
+        <a href="{% url 'logout' %}"
+           class="logout-button">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- MAIN -->
+
+<main class="dashboard-container">
+
+    <section class="welcome-section">
+
+        <p class="small-heading">
+            TABLE MANAGEMENT
+        </p>
+
+        <h1>
+            Tables
+        </h1>
+
+        <p>
+            Manage restaurant tables, seating capacity, and availability.
+        </p>
+
+    </section>
+
+
+
+    <!-- TABLE SECTION -->
+
+    <section class="orders-section">
+
+
+        <div class="section-heading">
+
+            <div>
+
+                <h2>
+                    Restaurant Tables
+                </h2>
+
+                <p>
+                    {{ tables|length }}
+                    table{{ tables|length|pluralize }}
+                    in the restaurant
+                </p>
+
+            </div>
+
+
+            <a href="{% url 'manager-table-create' %}"
+               class="add-button">
+
+                + Add Table
+
+            </a>
+
+        </div>
+
+
+
+        {% if tables %}
+
+
+            <div class="orders-table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Table
+                            </th>
+
+                            <th>
+                                Capacity
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody>
+
+
+                        {% for table in tables %}
+
+                        <tr>
+
+
+                            <td class="table-number">
+
+                                Table {{ table.table_number }}
+
+                            </td>
+
+
+
+                            <td>
+
+                                {{ table.capacity }}
+                                guest{{ table.capacity|pluralize }}
+
+                            </td>
+
+
+
+                            <td>
+
+                                <span class="status status-{{ table.status|lower }}">
+
+                                    {{ table.get_status_display }}
+
+                                </span>
+
+                            </td>
+
+
+
+                            <td>
+
+                                <div class="action-links">
+
+                                    <a href="{% url 'manager-table-edit' table.id %}"
+                                       class="edit-button">
+
+                                        Edit
+
+                                    </a>
+
+
+                                    <a href="{% url 'manager-table-delete' table.id %}"
+                                       class="delete-button">
+
+                                        Delete
+
+                                    </a>
+
+                                </div>
+
+                            </td>
+
+
+                        </tr>
+
+                        {% endfor %}
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        {% else %}
+
+
+            <div class="empty-state">
+
+                <h3>
+                    No Tables Yet
+                </h3>
+
+                <p>
+                    Add your first restaurant table to begin managing seating.
+                </p>
+
+            </div>
+
+
+        {% endif %}
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+    <div class="footer-content">
+
+
+        <div>
+
+            <div class="footer-logo">
+                SAVOUR<span>É</span>
+            </div>
+
+            <p>
+                Restaurant Management System
+            </p>
+
+        </div>
+
+
+
+        <div class="footer-right">
+
+            <p>
+                © 2026 SAVOURÉ Restaurant Management System
+            </p>
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

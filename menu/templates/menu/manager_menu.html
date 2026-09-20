@@ -1,0 +1,487 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Menu Management | Savouré</title>
+
+<link rel="stylesheet" href="{% static 'css/manager_menu.css' %}">
+
+</head>
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <a href="{% url 'manager-dashboard' %}"
+       class="logo">
+
+        SAVOUR<span>É</span>
+
+    </a>
+
+
+    <div class="nav-links">
+
+        <a href="{% url 'manager-dashboard' %}">
+            Dashboard
+        </a>
+
+
+        <a href="{% url 'manager-staff-list' %}">
+            Staff
+        </a>
+
+
+        <a href="{% url 'logout' %}"
+           class="logout-button">
+
+            Logout
+
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- MAIN CONTENT -->
+
+<main class="page-container">
+
+
+    <!-- PAGE INTRO -->
+
+    <section class="page-intro">
+
+        <p class="small-heading">
+            MANAGEMENT
+        </p>
+
+
+        <h1>
+            Menu Management
+        </h1>
+
+
+        <p>
+            Manage your restaurant categories and menu items.
+        </p>
+
+    </section>
+
+
+
+    <!-- CATEGORIES -->
+
+    <section class="management-section">
+
+
+        <div class="section-heading">
+
+            <p class="small-heading">
+                MENU
+            </p>
+
+
+            <h2>
+                Categories
+            </h2>
+
+        </div>
+
+
+
+        <div class="add-button-container">
+
+            <a href="{% url 'category-create' %}"
+               class="add-button">
+
+                + Add Category
+
+            </a>
+
+        </div>
+
+
+
+        {% if categories %}
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Name
+                            </th>
+
+                            <th>
+                                Description
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for category in categories %}
+
+                            <tr>
+
+                                <td>
+                                    <strong>
+                                        {{ category.name }}
+                                    </strong>
+                                </td>
+
+
+                                <td>
+
+                                    {% if category.description %}
+
+                                        {{ category.description }}
+
+                                    {% else %}
+
+                                        <span class="muted">
+                                            No description
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+
+                                <td>
+
+                                    <div class="action-buttons">
+
+                                        <a href="{% url 'category-edit' category.id %}"
+                                           class="edit-button">
+
+                                            Edit
+
+                                        </a>
+
+
+                                        <a href="{% url 'category-delete' category.id %}"
+                                           class="delete-button">
+
+                                            Delete
+
+                                        </a>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-state">
+
+                <h3>
+                    No categories yet
+                </h3>
+
+
+                <p>
+                    Add your first menu category.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+
+    </section>
+
+
+
+    <!-- MENU ITEMS -->
+
+    <section class="management-section">
+
+
+        <div class="section-heading">
+
+            <p class="small-heading">
+                MENU
+            </p>
+
+
+            <h2>
+                Menu Items
+            </h2>
+
+        </div>
+
+
+
+        <div class="add-button-container">
+
+            <a href="{% url 'menu-item-create' %}"
+               class="add-button">
+
+                + Add Menu Item
+
+            </a>
+
+        </div>
+
+
+
+        {% if menu_items %}
+
+            <div class="table-wrapper">
+
+                <table class="menu-items-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Item
+                            </th>
+
+                            <th>
+                                Category
+                            </th>
+
+                            <th>
+                                Price
+                            </th>
+
+                            <th>
+                                Availability
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for item in menu_items %}
+
+                            <tr>
+
+
+                                <!-- ITEM -->
+
+                                <td>
+
+                                    <div class="menu-item">
+
+                                        {% if item.image %}
+
+                                            <img src="{{ item.image.url }}"
+                                                 alt="{{ item.name }}"
+                                                 class="menu-item-image">
+
+                                        {% endif %}
+
+
+                                        <div class="menu-item-details">
+
+                                            <strong>
+                                                {{ item.name }}
+                                            </strong>
+
+
+                                            {% if item.description %}
+
+                                                <p>
+                                                    {{ item.description }}
+                                                </p>
+
+                                            {% endif %}
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+
+                                <!-- CATEGORY -->
+
+                                <td>
+                                    {{ item.category.name }}
+                                </td>
+
+
+
+                                <!-- PRICE -->
+
+                                <td>
+                                    ₦{{ item.price }}
+                                </td>
+
+
+
+                                <!-- AVAILABILITY -->
+
+                                <td>
+
+                                    {% if item.is_available %}
+
+                                        <span class="status available">
+                                            Available
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="status unavailable">
+                                            Unavailable
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+
+
+                                <!-- ACTIONS -->
+
+                                <td>
+
+                                    <div class="action-buttons">
+
+                                        <a href="{% url 'menu-item-edit' item.id %}"
+                                           class="edit-button">
+
+                                            Edit
+
+                                        </a>
+
+
+                                        <a href="{% url 'menu-item-delete' item.id %}"
+                                           class="delete-button">
+
+                                            Delete
+
+                                        </a>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-state">
+
+                <h3>
+                    No menu items yet
+                </h3>
+
+
+                <p>
+                    Add your first menu item.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+    <div class="footer-content">
+
+
+        <div>
+
+            <div class="footer-logo">
+
+                SAVOUR<span>É</span>
+
+            </div>
+
+
+            <p>
+                Restaurant management made simple.
+            </p>
+
+        </div>
+
+
+        <div class="footer-right">
+
+            <p>
+                Manager Portal
+            </p>
+
+
+            <p>
+                © 2026 Savouré
+            </p>
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>
